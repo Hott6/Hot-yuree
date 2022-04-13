@@ -27,7 +27,7 @@
                 android:id="@+id/info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="MY INFO"
+                android:text="INFO"
                 android:textSize="35sp"
                 android:textStyle="bold"
                 android:layout_marginTop="20dp"
