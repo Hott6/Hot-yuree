@@ -32,12 +32,12 @@ class RepoFragment : Fragment() {
 
         repoAdapter.repoList.addAll(
             listOf(
-                RepoData("안드로이드 과제 레포지토리", "안드 과제 레포입니다 안드짱 안드짱 안드짱짱짱짱"),
+                RepoData("안드로이드 과제 레포지토리", "안드 레포! 안드짱 안드짱 안드짱짱짱짱"),
                 RepoData("최유리 개인 과제 레포지토리", "유리 과제 레포입니다"),
-                RepoData("서버 과제 레포지토리", "서버 과제 레포입니다"),
+                RepoData("금잔디 6조 레포지토리", "금잔디 6조 레포입니다"),
                 RepoData("기획 과제 레포지토리", "기획 과제 레포입니다"),
-                RepoData("웹 과제 레포지토리", "웹 과제 레포입니다"),
-                RepoData("아요 과제 레포지토리", "아요 과제 레포입니다")
+                RepoData("아요 과제 레포지토리", "아요 과제 레포입니다"),
+                RepoData("서버 과제 레포지토리", "서버 과제 레포입니다")
             )
         )
         repoAdapter.notifyDataSetChanged()

@@ -46,34 +46,14 @@
                 app:layout_constraintTop_toBottomOf="@id/info" />
 
             <TextView
-                android:id="@+id/name"
+                android:id="@+id/myprofile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="이름 : 최유리"
+                android:text="@string/profile"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/image" />
-
-            <TextView
-                android:id="@+id/age"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="나이 : (빠른..) 23"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/name" />
-
-            <TextView
-                android:id="@+id/mbti"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="MBTI : ESFP"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/age" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/followerbtn"
@@ -86,7 +66,7 @@
                 android:textSize="20sp"
                 app:layout_constraintEnd_toStartOf="@id/repobtn"
                 app:layout_constraintStart_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/mbti" />
+                app:layout_constraintTop_toBottomOf="@id/myprofile" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/repobtn"
@@ -99,7 +79,7 @@
                 android:textSize="20sp"
                 app:layout_constraintEnd_toStartOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/followerbtn"
-                app:layout_constraintTop_toBottomOf="@id/mbti" />
+                app:layout_constraintTop_toBottomOf="@id/myprofile" />
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragment_main"
