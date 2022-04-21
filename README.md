@@ -447,6 +447,19 @@ companion object{
 ```
 **const** 가 붙은 이유는 런타임이 아니라 컴파일타임에 1, 2로 초기화되기 때문이다.
 
+### 7. !!와 :? 연산자
+```kotlin
+class FollowerFragment : Fragment() {
+    private lateinit var followerAdapter: FollowerAdapter
+    private var _binding: FragmentFollowerBinding? = null
+    private val binding get() = _binding!!
+```
+!!은 절대 null이 아니라고 컴파일러에게 알려주는 역할인데, 여기서 _binding 이 null이 되면 이 앱은 **NullPointerException** 이라는 런타임 에러를 띄우며 죽는다. ?: 연산자를 이용하면 더 안전하게 처리할 수 있다.
+```kotlin
+private val binding get() = _binding ?: error("binding이 초기화 안됐으니 초기화 하시오")
+```
+로 변경..!
+
 ---
 
 ## 실행 화면
