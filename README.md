@@ -435,7 +435,7 @@ FollowerViewHolder 클래스 안에 **binding.ivProfile.setImageResource(data.im
 오버라이딩 해주어야 하는 경우 alt + enter 누르면 오버라이딩이 자동으로 뜸! 오버라이딩 다 칠 필요 없어서 편하게 할 수 있다..!
 
 ### 5. GridLayout
-app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" 사용하면 바둑판처럼 배열 가능하다.- 
+app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" 사용하면 바둑판처럼 배열 가능하다.
 
 ### 6. const 
 ```kotlin
@@ -445,7 +445,7 @@ companion object{
     }
 }
 ```
-**const** 붙은 이유는 런타임이 아니라 컴파일타임에 1, 2로 초기화되기 때문이다.
+**const** 가 붙은 이유는 런타임이 아니라 컴파일타임에 1, 2로 초기화되기 때문이다.
 
 ---
 
