@@ -2,25 +2,27 @@ package com.example.a220402
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.a220402.databinding.ActivityHomeBinding
+import com.example.a220402.databinding.FragmentProfileBinding
 
 class HomeActivity : AppCompatActivity() {
     private var position = FOLLOWER_POSITION
-    private lateinit var binding: ActivityHomeBinding
+    private lateinit var binding: FragmentProfileBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
+        binding = FragmentProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initTransactionEvent()
     }
 
     fun initTransactionEvent() {
-        val fragment1 = FollowerFragment()
-        val fragment2 = RepoFragment()
+        val fragment1 = PfFollowerAdapter()
+        val fragment2 = PfRepoAdapter()
 
-        supportFragmentManager.beginTransaction().add(R.id.fragment_main, fragment1).commit()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragment_main, fragment1)
+            .commit()
 
         binding.followerbtn.setOnClickListener {
             if (position == REPO_POSITION) {
@@ -39,7 +41,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    companion object{
+    companion object {
         const val FOLLOWER_POSITION = 1
         const val REPO_POSITION = 2
     }

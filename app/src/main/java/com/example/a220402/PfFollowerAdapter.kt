@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.a220402.databinding.FragmentFollowerBinding
 
-class FollowerFragment : Fragment() {
-    private lateinit var followerAdapter: FollowerAdapter
+class PfFollowerAdapter : Fragment() {
+    private lateinit var followerAdapter: PfFollowerFragment
     private var _binding: FragmentFollowerBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding ?: error("binding이 초기화 안 됐으니 초기화 하시오.")
+    //_binding!!을 사용하면 만약에 null 값인 경우 NullPointerException이라는 런타임 에러 띄우며 죽으니 ?: 사용해 안전하게 처리하자
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +28,7 @@ class FollowerFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        followerAdapter = FollowerAdapter()
+        followerAdapter = PfFollowerFragment()
         binding.rvFollower.adapter = followerAdapter
 
         followerAdapter.followerList.addAll(

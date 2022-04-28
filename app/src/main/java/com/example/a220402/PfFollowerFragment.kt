@@ -3,13 +3,13 @@ package com.example.a220402
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.a220402.databinding.ItemFollowerListBinding
+import com.example.a220402.databinding.ItemProfileFollowerListBinding
 
-class FollowerAdapter : RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>() {
+class PfFollowerFragment : RecyclerView.Adapter<PfFollowerFragment.FollowerViewHolder>() {
     val followerList = mutableListOf<FollowerData>()
 
     class FollowerViewHolder(
-        private val binding: ItemFollowerListBinding
+        private val binding: ItemProfileFollowerListBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: FollowerData) {
             binding.ivProfile.setImageResource(data.image)
@@ -20,7 +20,7 @@ class FollowerAdapter : RecyclerView.Adapter<FollowerAdapter.FollowerViewHolder>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowerViewHolder {
         val binding =
-            ItemFollowerListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemProfileFollowerListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FollowerViewHolder(binding)
     }
 

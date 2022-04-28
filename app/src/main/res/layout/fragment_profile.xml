@@ -17,9 +17,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_Layout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="0dp"
+            android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -37,13 +37,14 @@
 
             <ImageView
                 android:id="@+id/image"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:src="@drawable/image"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/uxri"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/info" />
+                app:layout_constraintTop_toBottomOf="@id/info"
+                app:layout_constraintWidth_percent="0.5"/>
 
             <TextView
                 android:id="@+id/myprofile"
@@ -51,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/profile"
                 android:textSize="20sp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/image" />
@@ -60,8 +62,7 @@
                 android:layout_width="180dp"
                 android:layout_height="70dp"
                 android:layout_marginHorizontal="5dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/gradient1"
+                android:background="@drawable/rectangle_radius_5"
                 android:text="팔로워\n목록"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toStartOf="@id/repobtn"
@@ -73,8 +74,7 @@
                 android:layout_width="180dp"
                 android:layout_height="70dp"
                 android:layout_marginHorizontal="5dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/gradient2"
+                android:background="@drawable/rectangle_radius_5"
                 android:text="레포지토리\n목록"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toStartOf="parent"

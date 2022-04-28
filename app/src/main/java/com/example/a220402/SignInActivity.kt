@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.a220402.databinding.ActivitySignInBinding
-import kotlinx.android.synthetic.main.activity_sign_in.*
 
 class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignInBinding

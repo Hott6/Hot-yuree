@@ -3,13 +3,13 @@ package com.example.a220402
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.a220402.databinding.ItemRepoListBinding
+import com.example.a220402.databinding.ItemProfileRepoListBinding
 
 class RepoAdapter : RecyclerView.Adapter<RepoAdapter.RepoViewHolder>() {
     val repoList = mutableListOf<RepoData>()
 
     class RepoViewHolder(
-        private val binding: ItemRepoListBinding
+        private val binding: ItemProfileRepoListBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: RepoData) {
             binding.tvReponame.text = data.reponame
@@ -19,7 +19,7 @@ class RepoAdapter : RecyclerView.Adapter<RepoAdapter.RepoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepoViewHolder {
         val binding =
-            ItemRepoListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            ItemProfileRepoListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return RepoViewHolder(binding)
     }
 
