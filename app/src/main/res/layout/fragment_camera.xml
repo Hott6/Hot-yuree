@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:text="카메라"
         android:textSize="40sp"
+        android:fontFamily="@font/noto_sans_kr_bold"
+        android:includeFontPadding="false"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

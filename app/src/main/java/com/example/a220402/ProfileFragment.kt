@@ -36,13 +36,13 @@ class ProfileFragment : Fragment() {
         val fragment1 = PfFollowerAdapter()
         val fragment2 = PfRepoAdapter()
 
-        parentFragmentManager.beginTransaction()
+        childFragmentManager.beginTransaction()
             .add(R.id.fragment_main, fragment1)
             .commit()
 
         binding.followerbtn.setOnClickListener {
             if (position == REPO_POSITION) {
-                parentFragmentManager.beginTransaction().replace(R.id.fragment_main, fragment1)
+                childFragmentManager.beginTransaction().replace(R.id.fragment_main, fragment1)
                     .commit()
                 position = FOLLOWER_POSITION
             }
@@ -50,7 +50,7 @@ class ProfileFragment : Fragment() {
 
         binding.repobtn.setOnClickListener {
             if (position == FOLLOWER_POSITION) {
-                parentFragmentManager.beginTransaction().replace(R.id.fragment_main, fragment2)
+                childFragmentManager.beginTransaction().replace(R.id.fragment_main, fragment2)
                     .commit()
                 position = REPO_POSITION
             }

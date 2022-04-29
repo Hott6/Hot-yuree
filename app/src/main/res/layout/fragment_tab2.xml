@@ -13,6 +13,8 @@
         android:background="#C9C9C9"
         android:gravity="center"
         android:text="준비중입니다"
+        android:fontFamily="@font/noto_sans_kr_medium"
+        android:includeFontPadding="false"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

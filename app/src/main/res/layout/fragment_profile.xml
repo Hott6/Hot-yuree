@@ -12,8 +12,10 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_Layout"
@@ -23,36 +25,27 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/info"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="INFO"
-                android:textSize="35sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/constraint_Layout" />
-
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginTop="20dp"
                 android:src="@drawable/uxri"
                 app:layout_constraintDimensionRatio="1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/info"
-                app:layout_constraintWidth_percent="0.5"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent="0.5" />
 
             <TextView
                 android:id="@+id/myprofile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:includeFontPadding="false"
                 android:text="@string/profile"
                 android:textSize="20sp"
-                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/image" />
@@ -63,7 +56,9 @@
                 android:layout_height="70dp"
                 android:layout_marginHorizontal="5dp"
                 android:background="@drawable/rectangle_radius_5"
-                android:text="팔로워\n목록"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:includeFontPadding="false"
+                android:text="팔로워 목록"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toStartOf="@id/repobtn"
                 app:layout_constraintStart_toEndOf="parent"
@@ -75,7 +70,9 @@
                 android:layout_height="70dp"
                 android:layout_marginHorizontal="5dp"
                 android:background="@drawable/rectangle_radius_5"
-                android:text="레포지토리\n목록"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:includeFontPadding="false"
+                android:text="레포지토리 목록"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toStartOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/followerbtn"
