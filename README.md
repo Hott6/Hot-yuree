@@ -673,6 +673,7 @@ class ProfileFragment : Fragment() {
 * **childFragmentManager**를 사용하여 중첩 Fragment가 가능하게 한다.   
 parentFragmentManager를 사용해도 되지만, 만~약에 BottomNavigationView 중 하나가 사라진다면 예상치 못한 버그가 발생될 수 있으므로 안전하게 childFragmentManager를 사용하자.
 * **Glide** 사용하여 Profile에 있는 사진 원형으로 크롭
+---
 
 ## **3. 폰트 적용하기**
 ```xml
@@ -756,8 +757,9 @@ class HomeFragment : Fragment() {
 ```
 - initAdapter는 1에서 했던 내용과 동일
 - initTabLayout에서 TabLayoutMediator 불러옴
+---
 
-## 4. ViewPager2 Scroll 중첩 해결
+## **5. ViewPager2 Scroll 중첩 해결**
 - https://github.com/android/views-widgets-samples/blob/master/ViewPager2/app/src/main/java/androidx/viewpager2/integration/testapp/NestedScrollableHost.kt 에서 NestedScrollableHost.kt 파일 불러오기 (구글 깃허브) 
 ```xml
 //fragment_home.xml
