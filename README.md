@@ -860,6 +860,6 @@ android:includeFontPadding="false"
 # **실행 화면**
 | Profile | BottomNavigation | 중첩 해결 |
 |:---:|:---:|:---:|
-|<img src="https://user-images.githubusercontent.com/102457223/166404906-84ca387d-8a7e-497f-9e3d-3b8de507db35.gif" width="200" height="300"/>|<img src="https://user-images.githubusercontent.com/102457223/166404918-98539fa9-e8e1-4e35-bf8f-e0dbbcc4d3c1.gif" width="200" height="300"/>|<img src="https://user-images.githubusercontent.com/102457223/166404928-bb7c18da-c904-4394-9f6a-7b8b4842d06a.gif" width="200" height="300"/>|
+|<img src="https://user-images.githubusercontent.com/102457223/166404906-84ca387d-8a7e-497f-9e3d-3b8de507db35.gif" width="200" height="300"/>|<img src="https://user-images.githubusercontent.com/102457223/166404928-bb7c18da-c904-4394-9f6a-7b8b4842d06a.gif" width="200" height="300"/>|<img src="https://user-images.githubusercontent.com/102457223/166404918-98539fa9-e8e1-4e35-bf8f-e0dbbcc4d3c1.gif" width="200" height="300"/>|
 |ButtonSelector, CircleCrop, 원래 만들어 둔 HomeActivity를 ProfileFragment로 변경, BottomNavigation 적용|BottomNavigation으로 Profile, Home, Camera Fragment 넘기기, Home에 TabLayout 적용|ViewPager2에서 발생하게 되는 중첩 문제를 구글이 제시한 방식을 통하여 해결|
 ---
