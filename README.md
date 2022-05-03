@@ -434,6 +434,7 @@ FollowerViewHolder 클래스 안에 **binding.ivProfile.setImageResource(data.im
 오버라이딩 해주어야 하는 경우 alt + enter 누르면 오버라이딩이 자동으로 뜸! 오버라이딩 다 칠 필요 없어서 편하게 할 수 있다..!
 
 ### 5. GridLayout
+app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" 사용하면 바둑판처럼 배열 가능하다.
 
 ### 6. const 
 ```kotlin
@@ -451,3 +452,412 @@ companion object{
 |:---:|
 |<img src="https://user-images.githubusercontent.com/102457223/164293437-aba09d7d-f982-492d-99cf-a605bcfa34e3.gif" width="250" height="400"/>|
 |버튼 클릭시 전환, GridLayout 적용, 설명 길면 ...으로 표시되게 하기|
+
+---
+
+# **Seminar 3**
+[x] HomeActivity를 ProfileFragment로 바꾸기  
+[x] bottomNavigation 적용  
+[x] Button에 Selector 활용하기  
+[x] 이미지 원형으로 표시  
+[x] ViewPager2 중첩 해결
+
+---
+
+## **1. MainActivity**
+### 1-1. ViewPager2
+
+-먼저 Profile, Home, Camera Fragment 3개 생성
+-activity_main.xml에 ViewPager2를 배치하고 ViewPagerAdapter 생성
+```kotlin
+//TabViewPagerAdapter.kt
+package com.example.a220402
+
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.adapter.FragmentStateAdapter
+
+class TabViewPagerAdapter(fragment: Fragment) :
+    FragmentStateAdapter(fragment) {
+    val fragments = mutableListOf<Fragment>()
+
+    override fun getItemCount(): Int = fragments.size
+
+    override fun createFragment(position: Int): Fragment {
+    return when (position) {
+        FOLLOWING_FRAGMENT -> TabFragment1()
+        FOLLOWER_FRAGMENT -> TabFragment2()
+        else -> throw IndexOutOfBoundsException()
+    }
+}
+
+    companion object {
+    const val FOLLOWING_FRAGMENT = 0
+    const val FOLLOWER_FRAGMENT = 1
+    }
+}
+```
+ - FragmentStateAdapter 클래스 상속 받음.  
+ FragmentStateAdapter는 RecyclerView.Adapter를 상속받는다!
+
+### 1-2. BottomNavigationView  
+-bottomNavigationView 하단 메뉴 생성
+```xml
+//menu_sample.xml
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_profile"
+        android:icon="@drawable/ic_union"
+        android:title="프로필" />
+    <item
+        android:id="@+id/menu_home"
+        android:icon="@drawable/ic_home"
+        android:title="홈" />
+    <item
+        android:id="@+id/menu_camera"
+        android:icon="@drawable/ic_camera"
+        android:title="카메라" />
+</menu>
+```
+- Drawable Resource File에서 이미지 불러와서 icon 지정  
+```xml
+//selector_color.xml
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="#6424D5" android:state_pressed="true" /> //눌렀을 때
+    <item android:color="#6424D5" android:state_checked="true" />
+    <item android:color="#C9C9C9" android:state_checked="false" />
+</selector>
+```
+- selector로 버튼 및 BottomNavigation 눌렸을 때, 눌려 있을 때 등 색상 지정
+
+### 1-3. MainActivity (Adapter)  
+```kotlin
+//MainActivity.kt
+package com.example.a220402
+
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager2.widget.ViewPager2
+import com.example.a220402.databinding.ActivityMainBinding
+
+class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var testViewAdapter: TestViewAdapter
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        initAdapter()
+        initBottomNavi()
+    }
+
+    private fun initAdapter() {
+        val fragmentList = listOf(ProfileFragment(),HomeFragment(), CameraFragment())
+        testViewAdapter = TestViewAdapter(this)
+        testViewAdapter.fragments.addAll(fragmentList)
+
+        binding.vpMain.adapter = testViewAdapter
+    }
+
+    private fun initBottomNavi() {
+        binding.vpMain.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                binding.bnvMain.menu.getItem(position).isChecked = true
+            }
+        })
+
+        binding.bnvMain.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.menu_profile -> {
+                    binding.vpMain.currentItem = FIRST_FRAGMENT
+                    return@setOnItemSelectedListener true
+                }
+                R.id.menu_home -> {
+                    binding.vpMain.currentItem = SECOND_FRAGMENT
+                    return@setOnItemSelectedListener true
+                }
+                else -> {
+                    binding.vpMain.currentItem = THIRD_FRAGMENT
+                    return@setOnItemSelectedListener true
+                }
+            }
+        }
+    }
+
+    companion object {
+        const val FIRST_FRAGMENT = 0
+        const val SECOND_FRAGMENT = 1
+        const val THIRD_FRAGMENT = 2
+    }
+}
+```
+- 아래 MainActivity에서 initAdapter가 ViewPagerAdpater,  
+initBottomNavi가 ViewPager와 BottomNavigationView 연결하는 Adapter
+---
+
+## **2. ProfileFragment**
+
+```kotlin
+//ProfileFragment.kt
+package com.example.a220402
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.example.a220402.databinding.FragmentProfileBinding
+
+class ProfileFragment : Fragment() {
+    private var position = FOLLOWER_POSITION
+    private var _binding: FragmentProfileBinding? = null //fragment로 바꿨기 때문에 _binding
+    private val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다")
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
+
+        initTransactionEvent()
+        initImage() //꼭 return 전에 작성해줘야 한다
+
+        return binding.root
+    }
+
+    private fun initImage() {
+        Glide.with(this)
+            .load(R.drawable.uxri)
+            .circleCrop()
+            .into(binding.image)
+    } //이미지 원형으로 크롭
+
+    fun initTransactionEvent() {
+        val fragment1 = ProfileFollowerFragment()
+        val fragment2 = PfRepoAdapter()
+
+        childFragmentManager.beginTransaction() 
+            .add(R.id.fragment_main, fragment1)
+            .commit()
+
+        binding.followerbtn.setOnClickListener {
+            if (position == REPO_POSITION) {
+                childFragmentManager.beginTransaction().replace(R.id.fragment_main, fragment1)
+                    .commit()
+                position = FOLLOWER_POSITION
+            }
+        }
+
+        binding.repobtn.setOnClickListener {
+            if (position == FOLLOWER_POSITION) {
+                childFragmentManager.beginTransaction().replace(R.id.fragment_main, fragment2)
+                    .commit()
+                position = REPO_POSITION
+            }
+        }
+    }
+
+    companion object {
+        const val FOLLOWER_POSITION = 1
+        const val REPO_POSITION = 2
+    }
+}
+
+```
+* **childFragmentManager**를 사용하여 중첩 Fragment가 가능하게 한다.   
+parentFragmentManager를 사용해도 되지만, 만~약에 BottomNavigationView 중 하나가 사라진다면 예상치 못한 버그가 발생될 수 있으므로 안전하게 childFragmentManager를 사용하자.
+* **Glide** 사용하여 Profile에 있는 사진 원형으로 크롭
+
+## **3. 폰트 적용하기**
+```xml
+//noto_sans_kr.xml
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+    <font
+        android:font="@font/noto_sans_kr_thin"
+        android:fontWeight="200" />
+    <font
+        android:font="@font/noto_sans_kr_light"
+        android:fontWeight="300" />
+    <font
+        android:font="@font/noto_sans_kr_regular"
+        android:fontWeight="400" />
+    <font
+        android:font="@font/noto_sans_kr_medium"
+        android:fontWeight="500" />
+    <font
+        android:font="@font/noto_sans_kr_bold"
+        android:fontWeight="700" />
+    <font
+        android:font="@font/noto_sans_kr_black"
+        android:fontWeight="900" />
+</font-family>
+```
+- Drawable Resource File에서 font 폴더 생성
+- 파일명을 noto_sans_kr_nn으로 변경 후 불러옴
+- 각 폰트마다 fontWeight를 부여하여 사용할 수 있도록 xml 파일 생성
+---
+
+## **4. TabLayout**
+-fragment xml 파일에 TabLayout 추가하기  
+-HomeActivity에 TabFragmentAdapter와 initTabLayout 추가하기
+```kotlin
+//HomeActivity.kt
+package com.example.a220402
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import com.example.a220402.databinding.FragmentHomeBinding
+import com.google.android.material.tabs.TabLayoutMediator
+
+class HomeFragment : Fragment() {
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다")
+    private lateinit var sampleTabViewPagerAdapter: TabViewPagerAdapter
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
+
+        initAdapter()
+        initTabLayout()
+
+        return binding.root
+    }
+
+    private fun initAdapter() {
+        val fragmentList = listOf(TabFragment1(), TabFragment2())
+
+        sampleTabViewPagerAdapter = TabViewPagerAdapter(this)
+        sampleTabViewPagerAdapter.fragments.addAll(fragmentList)
+
+        binding.homevp.adapter = sampleTabViewPagerAdapter
+    }
+
+    private fun initTabLayout() {
+        val tabLabel = listOf("팔로잉", "팔로워")
+
+        TabLayoutMediator(binding.hometl,binding.homevp) {tab, position ->
+            tab.text = tabLabel[position]
+        }.attach()
+    }
+}
+```
+- initAdapter는 1에서 했던 내용과 동일
+- initTabLayout에서 TabLayoutMediator 불러옴
+
+## 4. ViewPager2 Scroll 중첩 해결
+- https://github.com/android/views-widgets-samples/blob/master/ViewPager2/app/src/main/java/androidx/viewpager2/integration/testapp/NestedScrollableHost.kt 에서 NestedScrollableHost.kt 파일 불러오기 (구글 깃허브) 
+```xml
+//fragment_home.xml
+<com.example.a220402.NestedScrollableHost
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/hometl">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/homevp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fontFamily="@font/noto_sans_kr_regular"
+        android:includeFontPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hometl" />
+
+</com.example.a220402.NestedScrollableHost> 
+```
+- 레이아웃 xml 파일에서 <NestedScrollableHost> 태그를 이용해 적용하고자 하는 요소를 감싸준다.
+- 이 때 해당 요소는 ViewPager2의 바로 아래에 위치한 유일한 자식이어야 한다!
+---
+# 💙 **Seminar 3에서 배운 내용**
+## 1. 폴더 관련
+- Drawable Resource File에서 폰트 폴더 생성하면 자꾸 없어졌었는데 로컬에서 안스 폴더 들어가서 찾았다.. 앞으로 파일이 안보이면 로컬에서 찾아보자..   
+
+## 2. return 문 
+```kotlin
+...
+        initTransactionEvent()
+        initImage() //return 전에 작성해줘야 한다
+
+        return binding.root
+    }
+```
+- return 뒤에 무언가를 호출하면 호출이 안되니 꼭 return 앞에서 호출하자!  
+
+## 3. xml : shape, solid, corner
+```xml
+//rectancle_radius_5
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+<solid android:color="@color/selector_color"/>
+<corners android:radius="5dp"/>
+</shape>
+```
+- 버튼 background로 불러올 수 있는 xml 파일이다.  
+shape로 모양을 정하고, corners로 모서리 굴곡 정도를 정하고, solid로 색을 정할 수 있는데 나는 color에서 미리 만들어두었던 Button Selector를 불러와서 적용하였다.  
+
+## 4. selector_color
+```xml
+//selector_color
+ <item android:color="#6424D5" android:state_pressed="true" />
+    <item android:color="#6424D5" android:state_checked="true" />
+    <item android:color="#6424D5" android:state_checked="false" />
+```
+- state_pressed는 버튼에서 사용하기 위한 내용이고(눌렀을 때), state_checked는 bottomNavi에서 사용하기 위한 내용이다(눌려 있는 상태). 이 내용을 한 xml 파일에 적용하고 각 xml 파일에서 background로 불러오면 된다.
+
+## 5. childFragment
+```kotlin
+//ProfileFragment
+...
+fun initTransactionEvent() {
+        val fragment1 = ProfileFollowerFragment()
+        val fragment2 = PfRepoAdapter()
+
+        childFragmentManager.beginTransaction() 
+            .add(R.id.fragment_main, fragment1)
+            .commit()
+...
+```
+* **childFragmentManager**를 사용하여 중첩 Fragment가 가능하게 한다.   
+parentFragmentManager를 사용해도 되지만, 만~약에 BottomNavigationView 중 하나가 사라진다면 예상치 못한 버그가 발생될 수 있으므로 안전하게 childFragmentManager를 사용하자.
+
+## 6. ViewPager2 중첩 해결
+```xml
+<com.example.a220402.NestedScrollableHost
+...
+</com.example.a220402.NestedScrollableHost>
+```
+- xml에서 위 코드로 ViewPager2를 감싸주고, 구글에서 제공하는  NestedScrollableHost.kt 파일을 추가함으로써 쉽게 중첩 스크롤 문제를 해결할 수 있다.
+
+## 7. Font 적용 시  Padding 제거
+```xml
+...
+android:fontFamily="@font/noto_sans_kr_medium"
+android:includeFontPadding="false"
+...
+```
+- font는 xml 파일에서 이런 식으로 불러오는데, 여기서 includeFontPadding을 false로 적용해주면 폰트를 적용했을 때 위아래로 적용된 패딩 값을 없앨 수 있다.
+
+## 8. png와 svg
+기기 크기가 모두 달라 디자인이 달라질 수 있다. 이 문제는 px가 아닌 dp로 크기를 지정하는데, svg와 9-patch로 dp로 크기적용이 가능하다. png는 그냥 삽입하면 크기 등이 달라질 수 있기 때문에 9-patch로 변경해주면 된다.
+
+---
+# **실행 화면**
+| Profile | BottomNavigation | 중첩 해결 |
+|:---:|:---:|:---:|
+|<img src="https://user-images.githubusercontent.com/102457223/166404906-84ca387d-8a7e-497f-9e3d-3b8de507db35.gif" width="200" height="300"/>|<img src="https://user-images.githubusercontent.com/102457223/166404918-98539fa9-e8e1-4e35-bf8f-e0dbbcc4d3c1.gif" width="200" height="300"/>|<img src="https://user-images.githubusercontent.com/102457223/166404928-bb7c18da-c904-4394-9f6a-7b8b4842d06a.gif" width="200" height="300"/>|
+|ButtonSelector, CircleCrop, 원래 만들어 둔 HomeActivity를 ProfileFragment로 변경, BottomNavigation 적용|BottomNavigation으로 Profile, Home, Camera Fragment 넘기기, Home에 TabLayout 적용|ViewPager2에서 발생하게 되는 중첩 문제를 구글이 제시한 방식을 통하여 해결|
+---
