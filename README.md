@@ -456,11 +456,13 @@ companion object{
 ---
 
 # **Seminar 3**
-[x] HomeActivity를 ProfileFragment로 바꾸기  
-[x] bottomNavigation 적용  
-[x] Button에 Selector 활용하기  
-[x] 이미지 원형으로 표시  
-[x] ViewPager2 중첩 해결
+- [x] HomeActivity를 ProfileFragment로 바꾸기  
+- [x] Font 적용 
+- [x] bottomNavigation 적용  
+- [x] TabLayout 적용
+- [x] Button에 Selector 활용하기  
+- [x] 이미지 원형으로 표시  
+- [x] ViewPager2 중첩 해결
 
 ---
 
