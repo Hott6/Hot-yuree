@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.a220402.databinding.ItemProfileFollowerListBinding
 
-class PfFollowerFragment : RecyclerView.Adapter<PfFollowerFragment.FollowerViewHolder>() {
+class ProfileFollowerAdapter : RecyclerView.Adapter<ProfileFollowerAdapter.FollowerViewHolder>() {
     val followerList = mutableListOf<FollowerData>()
 
     class FollowerViewHolder(

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.a220402.databinding.FragmentRepoBinding
 
-class PfRepoAdapter : Fragment() {
+class ProfileRepoFragment : Fragment() {
     private lateinit var repoAdapter: RepoAdapter
     private var _binding : FragmentRepoBinding? = null
     private val binding get() = _binding ?: error("binding이 초기화 안 됐으니 초기화 하시오.")

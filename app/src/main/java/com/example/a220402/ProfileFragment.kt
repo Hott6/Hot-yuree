@@ -33,8 +33,8 @@ class ProfileFragment : Fragment() {
     }
 
     fun initTransactionEvent() {
-        val fragment1 = PfFollowerAdapter()
-        val fragment2 = PfRepoAdapter()
+        val fragment1 = ProfileFollowerFragment()
+        val fragment2 = ProfileRepoFragment()
 
         childFragmentManager.beginTransaction()
             .add(R.id.fragment_main, fragment1)
