@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.a220402.databinding.ActivitySignInBinding
-import kotlinx.android.synthetic.main.activity_sign_in.*
 
 class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignInBinding
@@ -32,7 +31,7 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater) //inflate는 xml의 뷰를 객체화해준다고 생각하자
         setContentView(binding.root)
 
-        val intent = Intent(this, HomeActivity::class.java)
+        val intent = Intent(this, ProfileFragment::class.java)
 
         binding.btn.setOnClickListener() {
             if (binding.etId.text.isNullOrBlank() || binding.etPw.text.isNullOrBlank()) {

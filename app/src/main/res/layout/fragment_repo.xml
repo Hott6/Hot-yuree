@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RepoFragment">
+    tools:context=".ProfileRepoFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_repo"
@@ -13,7 +13,7 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2"
         tools:itemCount="6"
-        tools:listitem="@layout/item_repo_list"
+        tools:listitem="@layout/item_profile_repo_list"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

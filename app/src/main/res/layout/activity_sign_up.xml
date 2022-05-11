@@ -13,7 +13,8 @@
         android:layout_marginTop="40dp"
         android:text="회원가입"
         android:textSize="35sp"
-        android:textStyle="bold"
+        android:fontFamily="@font/noto_sans_kr_bold"
+        android:includeFontPadding="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,6 +25,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="120dp"
+        android:fontFamily="@font/noto_sans_kr_bold"
+        android:includeFontPadding="false"
         android:text="이름"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,6 +38,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:hint="이름을 입력해주세요."
+        android:fontFamily="@font/noto_sans_kr_regular"
+        android:includeFontPadding="false"
         app:layout_constraintTop_toBottomOf="@+id/tv_name"
         tools:layout_editor_absoluteX="10dp" />
 
@@ -44,6 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/noto_sans_kr_bold"
+        android:includeFontPadding="false"
         android:text="아이디"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -54,6 +61,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
+        android:fontFamily="@font/noto_sans_kr_regular"
+        android:includeFontPadding="false"
         android:hint="아이디를 입력해주세요."
         app:layout_constraintTop_toBottomOf="@+id/tv_id"
         tools:layout_editor_absoluteX="10dp" />
@@ -64,6 +73,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/noto_sans_kr_bold"
+        android:includeFontPadding="false"
         android:text="비밀번호"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,6 +86,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:hint="비밀번호를 입력해주세요."
+        android:fontFamily="@font/noto_sans_kr_regular"
+        android:includeFontPadding="false"
         android:inputType="textPassword"
         app:layout_constraintTop_toBottomOf="@+id/tv_pw"
         tools:layout_editor_absoluteX="10dp" />
@@ -85,6 +98,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="20dp"
+        android:fontFamily="@font/noto_sans_kr_bold"
+        android:includeFontPadding="false"
         android:text="회원가입 완료"
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@+id/et_pw" />
