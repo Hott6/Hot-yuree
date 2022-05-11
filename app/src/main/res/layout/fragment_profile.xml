@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ProfileFragment">
 
     <ScrollView
         android:id="@+id/sv_profile"
@@ -52,31 +52,33 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/followerbtn"
-                android:layout_width="180dp"
-                android:layout_height="70dp"
-                android:layout_marginHorizontal="5dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
                 android:background="@drawable/rectangle_radius_5"
                 android:fontFamily="@font/noto_sans_kr_medium"
                 android:includeFontPadding="false"
                 android:text="팔로워 목록"
                 android:textSize="20sp"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintEnd_toStartOf="@id/repobtn"
-                app:layout_constraintStart_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/myprofile" />
+                app:layout_constraintTop_toBottomOf="@id/myprofile"
+                app:layout_constraintStart_toStartOf="parent"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/repobtn"
-                android:layout_width="180dp"
-                android:layout_height="70dp"
-                android:layout_marginHorizontal="5dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
                 android:background="@drawable/rectangle_radius_5"
                 android:fontFamily="@font/noto_sans_kr_medium"
                 android:includeFontPadding="false"
                 android:text="레포지토리 목록"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toStartOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/followerbtn"
-                app:layout_constraintTop_toBottomOf="@id/myprofile" />
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@id/followerbtn"
+                app:layout_constraintTop_toBottomOf="@+id/myprofile"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragment_main"
@@ -85,7 +87,6 @@
                 app:layout_constraintEnd_toStartOf="parent"
                 app:layout_constraintStart_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/repobtn" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

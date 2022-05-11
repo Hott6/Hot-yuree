@@ -26,7 +26,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        val fragmentList = listOf(TabFragment1(), TabFragment2())
+        val fragmentList = listOf(HomeFollowingFragment(), HomeFollowerFragment())
 
         sampleTabViewPagerAdapter = TabViewPagerAdapter(this)
         sampleTabViewPagerAdapter.fragments.addAll(fragmentList)

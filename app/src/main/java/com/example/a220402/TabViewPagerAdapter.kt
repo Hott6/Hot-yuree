@@ -11,8 +11,8 @@ class TabViewPagerAdapter(fragment: Fragment) :
 
     override fun createFragment(position: Int): Fragment {
     return when (position) {
-        FOLLOWING_FRAGMENT -> TabFragment1()
-        FOLLOWER_FRAGMENT -> TabFragment2()
+        FOLLOWING_FRAGMENT -> HomeFollowingFragment()
+        FOLLOWER_FRAGMENT -> HomeFollowerFragment()
         else -> throw IndexOutOfBoundsException()
     }
 }
