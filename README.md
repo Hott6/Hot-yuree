@@ -1284,11 +1284,11 @@ class ProfileFollowerFragment : Fragment() {
 # **실행 화면**
 | 로그인 | POSTMAN |
 |:---:|:---:|
-|<img src="https://user-images.githubusercontent.com/102457223/168145631-bff89caa-da01-4bc1-954d-ab5ec64643aa.gif" width="300" height="400"/>|<img width="800" alt="로그인포스트맨" src="https://user-images.githubusercontent.com/102457223/168148653-03389591-4037-4cd4-a185-3d1d41dbe0d1.png">|
+|<img src="https://user-images.githubusercontent.com/102457223/168145631-bff89caa-da01-4bc1-954d-ab5ec64643aa.gif" width="250" height="400"/>|<img width="800" alt="로그인포스트맨" src="https://user-images.githubusercontent.com/102457223/168148653-03389591-4037-4cd4-a185-3d1d41dbe0d1.png">|
 | 회원가입 | POSTMAN |
-|<img src="https://user-images.githubusercontent.com/102457223/168145640-1b423aab-54ce-4444-841c-2163e8c62f85.gif" width="300" height="400"/>|<img width="800" alt="회원가입포스트맨" src="https://user-images.githubusercontent.com/102457223/168148746-6c3dbef3-d01d-4851-a1dd-ab2b971a8621.png">|
+|<img src="https://user-images.githubusercontent.com/102457223/168155240-6ea6adef-3d49-4ea6-ad0f-07a9c54f7539.gif" width="250" height="400"/>|<img width="800" alt="회원가입포스트맨" src="https://user-images.githubusercontent.com/102457223/168148746-6c3dbef3-d01d-4851-a1dd-ab2b971a8621.png">|
 | Github | POSTMAN |
-|<img src="https://user-images.githubusercontent.com/102457223/168150317-ebad5645-957d-456f-9811-fff60e1e90a9.gif" width="300" height="400"/>|<img src="https://user-images.githubusercontent.com/102457223/168150437-f33b8469-b253-4f65-a200-fd7672702a96.gif" width="800" height="400"/>|
+|<img src="https://user-images.githubusercontent.com/102457223/168150317-ebad5645-957d-456f-9811-fff60e1e90a9.gif" width="250" height="400"/>|<img src="https://user-images.githubusercontent.com/102457223/168150437-f33b8469-b253-4f65-a200-fd7672702a96.gif" width="800" height="400"/>|
 ---
 ## 💙 Seminar 4에서 배운 내용
 
