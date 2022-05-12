@@ -865,3 +865,533 @@ android:includeFontPadding="false"
 |<img src="https://user-images.githubusercontent.com/102457223/166404906-84ca387d-8a7e-497f-9e3d-3b8de507db35.gif" width="200" height="300"/>|<img src="https://user-images.githubusercontent.com/102457223/166404928-bb7c18da-c904-4394-9f6a-7b8b4842d06a.gif" width="200" height="300"/>|<img src="https://user-images.githubusercontent.com/102457223/166404918-98539fa9-e8e1-4e35-bf8f-e0dbbcc4d3c1.gif" width="200" height="300"/>|
 |ButtonSelector, CircleCrop, 원래 만들어 둔 HomeActivity를 ProfileFragment로 변경, BottomNavigation 적용|BottomNavigation으로 Profile, Home, Camera Fragment 넘기기, Home에 TabLayout 적용|ViewPager2에서 발생하게 되는 중첩 문제를 구글이 제시한 방식을 통하여 해결|
 ---
+    
+# Seminar 4
+
+-[x] 필수과제
+## 1. 로그인, 회원가입 서버통신 구현
+### 💜 RequestSignIn
+```kotlin
+package com.example.a220402
+
+data class RequestSignIn (
+    val email: String, 
+    val password: String
+)
+```
+- 변수명을 email로 했고 이는 postman의 키 값과 동일하니 Serialized 안 해줘도 된다.  
+
+### 💜 RequestSignup
+```Kotlin
+package com.example.a220402
+
+data class RequestSignUp (
+    val name: String,
+    val email: String,
+    val password: String
+)
+```
+### 💜 ResponseSignIn
+```Kotlin
+package com.example.a220402
+
+data class ResponseSignIn(
+    val status: Int,
+    val message: String,
+    val data: Data
+) {
+    data class Data(
+        val email: String,
+        val name: String
+    )
+}
+```
+
+### 💜 ResponseSignUp
+```Kotlin
+package com.example.a220402
+
+data class ResponseSignUp(
+    val status: Int,
+    val message: String,
+    val data: Data
+) {
+    data class Data(
+        val id: Int
+    )
+}
+```
+
+### 💜 SoptService
+```Kotlin
+package com.example.a220402
+
+import retrofit2.Call
+import retrofit2.http.Body
+import retrofit2.http.POST
+
+interface SoptService {
+    @POST("auth/signin")
+    fun postLogin(
+        @Body body: RequestSignIn
+    ): Call<ResponseSignIn>
+
+    @POST("auth/signup")
+    fun postSignup(
+        @Body body: RequestSignUp
+    ): Call<ResponseSignUp>
+}
+```
+- 동기적, 비동기적으로 Type을 받아오는 객체
+
+### 💜 ServiceCreator
+```Kotlin
+package com.example.a220402
+
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
+object ServiceCreator {
+    private const val BASE_URL = "http://13.124.62.236/" 
+    private const val BASE_URL_GITHUB = "https://api.github.com/"
+
+    private val retrofit:Retrofit = Retrofit.Builder() //생성자 호출
+        .baseUrl(BASE_URL) //서버에 메인 URL 전달
+        .addConverterFactory(GsonConverterFactory.create()) //gson 컨버터 연동
+        .build() //Retrofit 객체 변환
+
+    private val githubRetrofit:Retrofit = Retrofit.Builder() 
+        .baseUrl(BASE_URL_GITHUB) 
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
+
+    val soptService: SoptService = retrofit.create(SoptService::class.java)
+    val githubApiService: GithubApiService = githubRetrofit.create(GithubApiService::class.java)
+    //interface 객체를 create에 넘겨 실제 구현체 생성
+}
+```
+- BASE_URL = "http://13.124.62.236/" : 메인 서버 도메인  
+
+
+---
+-[x] 성장과제 2-1
+
+### 💜 SignInActivity
+```Kotlin
+...
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.Callback
+...
+
+class SignInActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySignInBinding
+    private lateinit var resultLauncher: ActivityResultLauncher<Intent>
+
+    private fun loginNetwork() {
+        val requestSignIn = RequestSignIn(
+            email = binding.etId.text.toString(),
+            password = binding.etPw.text.toString()
+        )
+//서버에 요청을 보내기 위한 RequestData 생성
+        val call: Call<ResponseSignIn> = ServiceCreator.soptService.postLogin(requestSignIn)
+//싱글톤 객체를 이용해 Retrofit이 만들어준 interface 구현체에 접근하여 Call 객체를 받아온다
+        call.enqueue(object : Callback<ResponseSignIn> { 
+            override fun onResponse( //Callback 익명클래스 선언
+                call: Call<ResponseSignIn>,
+                response: Response<ResponseSignIn>
+            ) {
+                if (response.isSuccessful) {
+                    val data = response.body()?.data 
+                
+
+                    Toast.makeText(
+                        this@SignInActivity,
+                        "${data?.email}님 반갑습니다!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+                } else Toast.makeText(this@SignInActivity, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+            override fun onFailure(call: Call<ResponseSignIn>, t: Throwable) {
+                Log.e("NetworkTest", "error:$t") //오류처리 코드
+            }
+        })
+    }
+...
+
+        binding.btn.setOnClickListener() {
+            loginNetwork() // 로그인 버튼 눌렀을 때 서버통신 이루어짐
+        
+...
+```
+- call.enqueue는 실제 서버통신을 비동기적으로 요청
+- if문에서 val data는 null값 올 수 있으므로 nullable 타입
+
+### 💜 SignUpActivity
+
+```Kotlin
+...
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
+class SignUpActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySignUpBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.btnFinshSignup.setOnClickListener {
+            if (binding.etName.text.isNullOrBlank() || binding.etId.text.isNullOrBlank() || binding.etPw.text.isNullOrBlank()) {
+                Toast.makeText(this, "입력되지 않은 정보가 있습니다", Toast.LENGTH_SHORT).show()
+            } else {
+                val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
+                intent.putExtra("id", et_id.text.toString()) //id에 et_id 데이터 담음
+                intent.putExtra("pw", et_pw.text.toString()) //마찬가지로 pw에 et_pw 담음
+                setResult(Activity.RESULT_OK, intent) //result_ok인 경우 SignInActivitiy로 intent 객체 보냄
+                SignUpNetwork()
+                finish()
+            }
+        }
+    }
+    //함수.. oncreate 밑에 씁시다..
+
+    private fun SignUpNetwork() {
+        val requestSignUp = RequestSignUp(
+            name = binding.etName.text.toString(),
+            email = binding.etId.text.toString(),
+            password = binding.etPw.text.toString()
+        )
+
+        val call: Call<ResponseSignUp> = ServiceCreator.soptService.postSignup(requestSignUp)
+
+        call.enqueue(object : Callback<ResponseSignUp> {
+            override fun onResponse( //Callback 익명클래스 선언
+                call: Call<ResponseSignUp>,
+                response: Response<ResponseSignUp>
+            ) {
+                if (response.isSuccessful) {
+                    val data = response.body()?.data //null값 올 수 있으므로 nullable 타입
+
+                    Toast.makeText(this@SignUpActivity, "${data?.id}님 반갑습니다!", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
+                } else Toast.makeText(this@SignUpActivity, "회원가입에 실패하였습니다.", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onFailure(call: Call<ResponseSignUp>, t: Throwable) {
+                Log.e("NetworkTest", "error:$t") //오류처리 코드
+            }
+        })
+    }
+}
+```
+
+### 💜 ResponseUserInfo
+```Kotlin
+package com.example.a220402
+
+data class ResponseUserInfo(
+        val login : String,
+        val avatar_url : String
+        )
+
+```
+### 💜 GithubApiService
+```Kotlin
+package com.example.a220402
+
+import retrofit2.Call
+import retrofit2.http.GET
+
+interface GithubApiService{
+    @GET("users/uxri")
+    fun getUserInfo(): Call<ResponseUserInfo>
+
+    @GET("users/uxri/followers")
+    fun getFollowingInfo(): Call<List<ResponseUserInfo>>
+}
+```
+- GithubApi에서 받아오는 것
+
+### 💜 ProfileFollowerAdapter
+```Kotlin
+...
+    class FollowerViewHolder(
+        private val binding: ItemProfileFollowerListBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun onBind(data: ResponseUserInfo) {
+            binding.follower = data 
+            Glide.with(binding.ivProfile).load(data.avatar_url)
+                .circleCrop()
+                .into(binding.ivProfile)
+        }
+    }
+...
+```
+- databinding 사용. 바인딩 이름, 설명 다 할 필요 없이 코드가 한 줄로 줄어들었음.
+- Glide로 Github에서 받아온 avatar_url 사진 불러옴
+
+### 💜 ProfileFollowerFragment
+ㄴ~~이거진짜속많이썩였다..이마짚...~~
+```Kotlin
+...
+class ProfileFollowerFragment : Fragment() {
+    private lateinit var followerAdapter: ProfileFollowerAdapter
+    private var _binding: FragmentFollowerBinding? = null
+    private val binding get() = _binding ?: error("바인딩이 초기화되지 않았습니다")
+    var responseData = mutableListOf<ResponseUserInfo>()
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentFollowerBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initUserInfoNetwork()
+        followerAdapter = ProfileFollowerAdapter()
+        binding.rvFollower.adapter = followerAdapter
+    }
+
+    private fun initUserInfoNetwork() {
+        val call: Call<List<ResponseUserInfo>> = ServiceCreator.githubApiService.getFollowingInfo()
+
+        call.enqueue(object : Callback<List<ResponseUserInfo>> {
+            override fun onResponse(
+                call: Call<List<ResponseUserInfo>>,
+                response: Response<List<ResponseUserInfo>>
+            ) {
+                if (response.isSuccessful) {
+                    val data = response.body()
+                    data?.let {
+                        followerAdapter.followerList = it.toMutableList()
+                        followerAdapter.notifyDataSetChanged()
+                    }
+                } else {
+                }
+            }
+
+            override fun onFailure(call: Call<List<ResponseUserInfo>>, t: Throwable) {
+            }
+
+
+        })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+}
+
+```
+- onCreateView에서 함수 다 호출하지 말고 override fun onViewCreated에서 하자!
+- followerAdapter.notifyDataSetChanged 제발 쓰자 이거 안쓰면 안뜬다고...
+
+### 💜 item_profile_follower_list
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="follower"
+            type="com.example.a220402.ResponseUserInfo" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/round">
+
+        <ImageView
+            android:id="@+id/iv_profile"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.25" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:includeFontPadding="false"
+            android:text="@{follower.login}"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/iv_profile"
+            app:layout_constraintTop_toTopOf="@+id/iv_profile"
+            app:layout_constraintBottom_toBottomOf="@id/iv_profile"
+            tools:text="최유리" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+```
+- databinding을 해주었습니다. follower안에 이미지랑 로그인이 들어가있습니다~
+- ImageView에서 src를 지웠습니다... Glide 해줬기 때문에 src도 있으면 중복되니까! 둘다 있었을 때 src 때문에 이미지가 처음에만 뜨고 프래그먼트 넘기거나 하면 사진이 안 떴었다.
+
+### 💜 fragment_follower.xml
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ProfileFollowerFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_Follower"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="8"
+            tools:listitem="@layout/item_profile_follower_list" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+```
+- 얘두 마찬가지로 데이터바인딩 해줬습니다!
+---
+# **실행 화면**
+| 로그인 | POSTMAN |
+|:---:|:---:|
+|<img src="https://user-images.githubusercontent.com/102457223/168145631-bff89caa-da01-4bc1-954d-ab5ec64643aa.gif" width="200" height="300"/>|<img width="1009" alt="로그인포스트맨" src="https://user-images.githubusercontent.com/102457223/168148653-03389591-4037-4cd4-a185-3d1d41dbe0d1.png">|
+| 회원가입 | POSTMAN |
+|<img src="https://user-images.githubusercontent.com/102457223/168145640-1b423aab-54ce-4444-841c-2163e8c62f85.gif" width="200" height="300"/>|<img width="1004" alt="회원가입포스트맨" src="https://user-images.githubusercontent.com/102457223/168148746-6c3dbef3-d01d-4851-a1dd-ab2b971a8621.png">|
+| Github | POSTMAN |
+|<img src="https://user-images.githubusercontent.com/102457223/168150317-ebad5645-957d-456f-9811-fff60e1e90a9.gif" width="200" height="300"/>|<img src="https://user-images.githubusercontent.com/102457223/168150437-f33b8469-b253-4f65-a200-fd7672702a96.gif" width="1000" height="300"/>|
+---
+## 💙 Seminar 4에서 배운 내용
+
+### 1. 버튼 크기 설정
+
+```xml
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+app:layout_constraintHorizontal_bias="0.5"
+```
+
+width와 height 값을 직접 입력하는 것보다 width 값을 0으로, height 값은 parent로 준 후에constraintHorizontal_bias에서 비율로 설정해주는 것이 좋습니다!
+
+### 2. FragmentContainerView
+
+```xml
+<androidx.fragment.app.FragmentContainerView
+android:id="@+id/fragment_main"
+android:layout_width="match_parent"
+android:layout_height="0dp"
+app:layout_constraintEnd_toStartOf="parent"
+app:layout_constraintStart_toEndOf="parent"
+app:layout_constraintTop_toBottomOf="@+id/repobtn"/>
+```
+
+버튼 내용 수정하다가 FragmentContainerView 날려먹고 코틀린 파일에서 container id 오류 뜬다고 몇십분 헤매다가... 갑자기 뭔가를 지워버린 것 같은게 생각나서.. 깃헙에서 빨리 데려오니 괜찮아졌습니다... 다음부턴 이 중요한걸 날려먹는 바보짓을 하지말자...   
+~~바보같은 나 도와준 천재 짱수빈 사랑해~~
+
+### 3. import
+
+```kotlin
+import retrofit2.Call
+import retrofit2.Response
+import retrofit2.Callback
+```
+
+제발 까먹지 말고 추가합시다  
+" option enter " 로
+
+### 4. 프래그먼트 이름은 의미있는 것으로 꼭꼭 바꿔줍시다
+- TabFragment1 이런 의미없는건 안돼ㅡㅡ
+
+### 5. Glide랑 src
+```kotlin
+    class FollowerViewHolder(
+        private val binding: ItemProfileFollowerListBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun onBind(data: ResponseUserInfo) {
+            binding.follower = data 
+            Glide.with(binding.ivProfile).load(data.avatar_url)
+                .circleCrop()
+                .into(binding.ivProfile)
+```
+- ImageView에서 src를 아예 지워줬습니다! 액티비티에서 Glide를 해줬기 때문에 src도 있으면 중복되니까! 둘다 있었을 때 src 때문에 이미지가 처음에만 뜨고 프래그먼트 넘기거나 하면 사진이 안 뜨는 일이 발생합니다..   
+~~저를 구제해주신 승현오빠에게 압도적 감사를 드립니다!!!~~
+
+### 6. ProfileFollowerFragment에서-1
+```kotlin
+ override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initUserInfoNetwork()
+        followerAdapter = ProfileFollowerAdapter()
+        binding.rvFollower.adapter = followerAdapter
+    }
+```
+- 함수를 onCreateView에서 다 호출하지 말고 이렇게 해줍시다~
+
+### 7. ProfileFollowerFragment에서-2
+```kotlin
+private fun initUserInfoNetwork() {
+        val call: Call<List<ResponseUserInfo>> = ServiceCreator.githubApiService.getFollowingInfo()
+
+        call.enqueue(object : Callback<List<ResponseUserInfo>> {
+            override fun onResponse(
+                call: Call<List<ResponseUserInfo>>,
+                response: Response<List<ResponseUserInfo>>
+            ) {
+                if (response.isSuccessful) {
+                    val data = response.body()
+                    data?.let {
+                        followerAdapter.followerList = it.toMutableList()
+                        followerAdapter.notifyDataSetChanged()
+                    }
+                } else {
+                }
+            }
+```
+- 사실 이 부분이 완벽히 이해되지는 않았습니다.. ResponseUserInfo에서 데이터를 리스트로 받아온다는 것은 알았습니다!  
+- MutableList가 이해되지 않아서 더 공부해 볼 예정입니다.
+
+### 8. notifyDataSetChanged()
+```kotlin
+ followerAdapter.notifyDataSetChanged()
+ ```
+ - 이 친구를 해주지 않으면 보이지 않습니다...  
+ ~~이거때문에 고생한 용민오빠에게 영광을(?) 돌립니댜..~~
+
+### 9. 함수는 onCreate 밑에 씁시다
+```kotlin
+binding.btnFinshSignup.setOnClickListener
+```
+이게 왜 맨 뒤로 가있었죠 최유리씨? 정신차리세요
+
+ ### 10. 꿀팁 아닌 꿀팁
+ - Local History로 되돌리기가 가능합니다
+ - command + F로 뭐 예를 들어 ResponseUserInfo가 있는 내용을 찾고싶다, 하면 바로 검색이 가능합니다.
