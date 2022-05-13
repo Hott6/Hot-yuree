@@ -61,29 +61,3 @@ class ProfileFollowerFragment : Fragment() {
         _binding = null
     }
 }
-
-/*
-override fun onResponse(
-    call: Call<ResponseUserInfo>,
-    response: Response<List<ResponseUserInfo>>
-) {
-    if (response.isSuccessful) {
-        Log.d("uxriServer", "isSuccessful")
-        responseData=response.body()
-        if(followerAdapter.followerList != response.body()){
-            Log.d("uxriServer", "isSuccessful")
-            if(response.body()!=null){
-                Log.d("uxriServer", "isSuccessful")
-                followerAdapter.followerList.addAll(response.body()!!)
-            }
-        }
-
-    } else {
-        Toast.makeText(requireContext(), "깃허브 팔로워 조회 실패", Toast.LENGTH_LONG).show()
-    }
-}
-
-override fun onFailure(call: Call<List<ResponseUserInfo>>, t: Throwable) {
-    Log.e("NetworkTest", "error:$t") //오류처리 코드
-}
-*/
