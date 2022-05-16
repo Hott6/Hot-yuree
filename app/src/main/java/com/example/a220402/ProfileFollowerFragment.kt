@@ -14,7 +14,6 @@ class ProfileFollowerFragment : Fragment() {
     private lateinit var followerAdapter: ProfileFollowerAdapter
     private var _binding: FragmentFollowerBinding? = null
     private val binding get() = _binding ?: error("바인딩이 초기화되지 않았습니다")
-    var responseData = mutableListOf<ResponseUserInfo>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
