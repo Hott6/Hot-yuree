@@ -1,5 +1,7 @@
-package com.example.a220402
+package com.example.a220402.util
 
+import com.example.a220402.api.GithubApiService
+import com.example.a220402.api.SoptService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 //서비스를 생성해주는 구현체 부분

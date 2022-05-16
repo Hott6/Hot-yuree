@@ -1,7 +1,9 @@
-package com.example.a220402
+package com.example.a220402.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.a220402.fragment.HomeFollowerFragment
+import com.example.a220402.fragment.HomeFollowingFragment
 
 class TabViewPagerAdapter(fragment: Fragment) :
     FragmentStateAdapter(fragment) {

@@ -1,4 +1,4 @@
-package com.example.a220402
+package com.example.a220402.fragment
 
 import android.Manifest
 import android.app.Activity.RESULT_CANCELED

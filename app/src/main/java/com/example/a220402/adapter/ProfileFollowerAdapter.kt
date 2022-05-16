@@ -1,10 +1,11 @@
-package com.example.a220402
+package com.example.a220402.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.a220402.databinding.ItemProfileFollowerListBinding
+import com.example.a220402.response.ResponseUserInfo
 
 class ProfileFollowerAdapter : RecyclerView.Adapter<ProfileFollowerAdapter.FollowerViewHolder>() {
     var followerList = mutableListOf<ResponseUserInfo>()

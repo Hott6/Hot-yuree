@@ -1,4 +1,4 @@
-package com.example.a220402
+package com.example.a220402.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

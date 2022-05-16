@@ -1,10 +1,11 @@
-package com.example.a220402
+package com.example.a220402.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.a220402.adapter.TabViewPagerAdapter
 import com.example.a220402.databinding.FragmentHomeBinding
 import com.google.android.material.tabs.TabLayoutMediator
 

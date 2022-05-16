@@ -1,10 +1,13 @@
-package com.example.a220402
+package com.example.a220402.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.a220402.adapter.ProfileFollowerAdapter
+import com.example.a220402.response.ResponseUserInfo
+import com.example.a220402.util.ServiceCreator
 import com.example.a220402.databinding.FragmentFollowerBinding
 import retrofit2.Call
 import retrofit2.Callback

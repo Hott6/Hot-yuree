@@ -1,6 +1,6 @@
 @file:Suppress("UnusedImport")
 
-package com.example.a220402
+package com.example.a220402.activity
 
 import retrofit2.Call
 import retrofit2.Response
@@ -13,7 +13,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import com.example.a220402.request.RequestSignIn
+import com.example.a220402.response.ResponseSignIn
 import com.example.a220402.databinding.ActivitySignInBinding
+import com.example.a220402.util.ServiceCreator
 
 class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignInBinding

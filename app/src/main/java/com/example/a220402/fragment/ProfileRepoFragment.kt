@@ -1,10 +1,12 @@
-package com.example.a220402
+package com.example.a220402.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.a220402.adapter.RepoAdapter
+import com.example.a220402.data.RepoData
 import com.example.a220402.databinding.FragmentRepoBinding
 
 class ProfileRepoFragment : Fragment() {

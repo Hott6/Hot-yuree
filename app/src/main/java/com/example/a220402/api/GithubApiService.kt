@@ -1,5 +1,6 @@
-package com.example.a220402
+package com.example.a220402.api
 
+import com.example.a220402.response.ResponseUserInfo
 import retrofit2.Call
 import retrofit2.http.GET
 

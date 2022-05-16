@@ -1,4 +1,4 @@
-package com.example.a220402
+package com.example.a220402.response
 
 data class ResponseSignIn(
     val status: Int,

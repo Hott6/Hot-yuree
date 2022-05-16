@@ -1,5 +1,9 @@
-package com.example.a220402
+package com.example.a220402.api
 
+import com.example.a220402.request.RequestSignIn
+import com.example.a220402.request.RequestSignUp
+import com.example.a220402.response.ResponseSignIn
+import com.example.a220402.response.ResponseSignUp
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST

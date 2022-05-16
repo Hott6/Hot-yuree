@@ -1,8 +1,9 @@
-package com.example.a220402
+package com.example.a220402.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.a220402.data.RepoData
 import com.example.a220402.databinding.ItemProfileRepoListBinding
 
 class RepoAdapter : RecyclerView.Adapter<RepoAdapter.RepoViewHolder>() {

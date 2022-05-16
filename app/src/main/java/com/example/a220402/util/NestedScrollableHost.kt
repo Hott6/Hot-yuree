@@ -1,4 +1,4 @@
-package com.example.a220402
+package com.example.a220402.util
 
 import android.content.Context
 import android.util.AttributeSet

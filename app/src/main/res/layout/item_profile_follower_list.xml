@@ -7,7 +7,7 @@
 
         <variable
             name="follower"
-            type="com.example.a220402.ResponseUserInfo" />
+            type="com.example.a220402.response.ResponseUserInfo" />
 
     </data>
 
