@@ -8,7 +8,7 @@ import com.example.a220402.databinding.ItemProfileFollowerListBinding
 import com.example.a220402.response.ResponseUserInfo
 
 class ProfileFollowerAdapter : RecyclerView.Adapter<ProfileFollowerAdapter.FollowerViewHolder>() {
-    var followerList = mutableListOf<ResponseUserInfo>()
+    val followerList = mutableListOf<ResponseUserInfo>()
 
     class FollowerViewHolder(
         private val binding: ItemProfileFollowerListBinding

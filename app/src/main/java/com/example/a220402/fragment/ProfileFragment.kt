@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.a220402.R
 import com.example.a220402.databinding.FragmentProfileBinding
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment() {
     private var position = FOLLOWER_POSITION
@@ -46,6 +47,8 @@ class ProfileFragment : Fragment() {
                 childFragmentManager.beginTransaction().replace(R.id.fragment_main, fragment1)
                     .commit()
                 position = FOLLOWER_POSITION
+                followerbtn.isSelected = true
+                repobtn.isSelected = false
             }
         }
 
@@ -54,6 +57,8 @@ class ProfileFragment : Fragment() {
                 childFragmentManager.beginTransaction().replace(R.id.fragment_main, fragment2)
                     .commit()
                 position = REPO_POSITION
+                followerbtn.isSelected = false
+                repobtn.isSelected = true
             }
         }
     }

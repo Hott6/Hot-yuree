@@ -8,7 +8,6 @@
         <variable
             name="follower"
             type="com.example.a220402.response.ResponseUserInfo" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,9 +41,9 @@
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/iv_profile"
             app:layout_constraintStart_toEndOf="@+id/iv_profile"
             app:layout_constraintTop_toTopOf="@+id/iv_profile"
-            app:layout_constraintBottom_toBottomOf="@id/iv_profile"
             tools:text="최유리" />
 
 

@@ -38,15 +38,11 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater) //inflate는 xml의 뷰를 객체화해준다고 생각하자
         setContentView(binding.root)
 
-        val intent = Intent(this, MainActivity::class.java)
-
         binding.btn.setOnClickListener() {
             if (binding.etId.text.isNullOrBlank() || binding.etPw.text.isNullOrBlank()) {
                 Toast.makeText(this, "아이디/비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
             } else {
-                if(binding.etId.text.isNotEmpty() || binding.etPw.text.isNotEmpty()) {
                     loginNetwork() // 로그인 버튼 눌렀을 때 빈칸이 아닌 경우 서버통신 이루어짐
-                }
             }
         }
 
