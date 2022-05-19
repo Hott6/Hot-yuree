@@ -1280,6 +1280,56 @@ class ProfileFollowerFragment : Fragment() {
 </layout>
 ```
 - 얘두 마찬가지로 데이터바인딩 해줬습니다!
+    
+- [X] 성장과제 2-2
+### 💜 ResponseWrapper.kt
+```kotlin
+package com.example.a220402.response
+
+data class ResponseWrapper<T>(
+    val status: Int,
+    val success: Boolean,
+    val message: String,
+    val data: T?
+)
+```
+
+```kotlin
+val call: Call<ResponseWrapper<ResponseSignIn>> = ServiceCreator.soptService.postLogin(requestSignIn)
+        call.enqueue(object : Callback<ResponseWrapper<ResponseSignIn>> { 
+            override fun onResponse(
+                call: Call<ResponseWrapper<ResponseSignIn>>,
+                response: Response<ResponseWrapper<ResponseSignIn>>
+            ) {
+                if (response.isSuccessful) {
+                    val data = response.body()?.data 
+
+                    Toast.makeText(
+                        this@SignInActivity,
+                        "${data?.email}님 반갑습니다!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+                } else Toast.makeText(this@SignInActivity, "로그인에 실패하였습니다.", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+            override fun onFailure(call: Call<ResponseWrapper<ResponseSignIn>>, t: Throwable) {
+                Log.e("NetworkTest", "error:$t") 
+            }
+        })
+```
+
+이렇게 WrapperClass를 사용하면 (SignUpActivity도 마찬가지)
+
+```kotlin
+data class ResponseSignIn(
+    val email: String,
+    val name: String
+)
+```
+반복되는 내용을 줄일 수 있다!
+
 ---
 # **실행 화면**
 | 로그인 | POSTMAN |
@@ -1392,6 +1442,7 @@ binding.btnFinshSignup.setOnClickListener
 ```
 이게 왜 맨 뒤로 가있었죠 최유리씨? 정신차리세요
 
- ### 10. 꿀팁 아닌 꿀팁
+### 10. 꿀팁 아닌 꿀팁
  - Local History로 되돌리기가 가능합니다
  - command + F로 뭐 예를 들어 ResponseUserInfo가 있는 내용을 찾고싶다, 하면 바로 검색이 가능합니다.
+    
