@@ -868,8 +868,7 @@ android:includeFontPadding="false"
     
 # Seminar 4
 
-- [X] 필수과제
-## 1. 로그인, 회원가입 서버통신 구현
+## - 필수과제 :  로그인, 회원가입 서버통신 구현
 ### 💜 RequestSignIn
 ```kotlin
 package com.example.a220402
@@ -974,7 +973,7 @@ object ServiceCreator {
 
 
 ---
-- [X] 성장과제 2-1
+## - 성장과제 2-1 : Github Follower API 
 
 ### 💜 SignInActivity
 ```Kotlin
@@ -1281,7 +1280,7 @@ class ProfileFollowerFragment : Fragment() {
 ```
 - 얘두 마찬가지로 데이터바인딩 해줬습니다!
     
-- [X] 성장과제 2-2
+## - 성장과제 2-2 : WrapperClass
 ### 💜 ResponseWrapper.kt
 ```kotlin
 package com.example.a220402.response
