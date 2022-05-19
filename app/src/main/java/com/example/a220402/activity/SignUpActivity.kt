@@ -6,9 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.a220402.databinding.ActivitySignUpBinding
 import com.example.a220402.request.RequestSignUp
 import com.example.a220402.response.ResponseSignUp
-import com.example.a220402.databinding.ActivitySignUpBinding
+import com.example.a220402.response.ResponseWrapper
 import com.example.a220402.util.ServiceCreator
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import retrofit2.Call
@@ -45,12 +46,12 @@ class SignUpActivity : AppCompatActivity() {
             password = binding.etPw.text.toString()
         )
 
-        val call: Call<ResponseSignUp> = ServiceCreator.soptService.postSignup(requestSignUp)
+        val call: Call<ResponseWrapper<ResponseSignUp>> = ServiceCreator.soptService.postSignup(requestSignUp)
 
-        call.enqueue(object : Callback<ResponseSignUp> {
+        call.enqueue(object : Callback<ResponseWrapper<ResponseSignUp>> {
             override fun onResponse( //Callback 익명클래스 선언
-                call: Call<ResponseSignUp>,
-                response: Response<ResponseSignUp>
+                call: Call<ResponseWrapper<ResponseSignUp>>,
+                response: Response<ResponseWrapper<ResponseSignUp>>
             ) {
                 if (response.isSuccessful) {
                     val data = response.body()?.data //null값 올 수 있으므로 nullable 타입
@@ -60,7 +61,7 @@ class SignUpActivity : AppCompatActivity() {
                 } else Toast.makeText(this@SignUpActivity, "회원가입에 실패하였습니다.", Toast.LENGTH_SHORT).show()
             }
 
-            override fun onFailure(call: Call<ResponseSignUp>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseWrapper<ResponseSignUp>>, t: Throwable) {
                 Log.e("NetworkTest", "error:$t") //오류처리 코드
             }
         })

@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.example.a220402.request.RequestSignIn
 import com.example.a220402.response.ResponseSignIn
 import com.example.a220402.databinding.ActivitySignInBinding
+import com.example.a220402.response.ResponseWrapper
 import com.example.a220402.util.ServiceCreator
 
 class SignInActivity : AppCompatActivity() {
@@ -59,12 +60,12 @@ class SignInActivity : AppCompatActivity() {
             password = binding.etPw.text.toString()
         )
         //서버에 요청을 보내기 위한 RequestData 생성
-        val call: Call<ResponseSignIn> = ServiceCreator.soptService.postLogin(requestSignIn)
+        val call: Call<ResponseWrapper<ResponseSignIn>> = ServiceCreator.soptService.postLogin(requestSignIn)
         //싱글톤 객체를 이용해 Retrofit이 만들어준 interface 구현체에 접근하여 Call 객체를 받아온다
-        call.enqueue(object : Callback<ResponseSignIn> { //실제 서버통신을 비동기적으로 요청
+        call.enqueue(object : Callback<ResponseWrapper<ResponseSignIn>> { //실제 서버통신을 비동기적으로 요청
             override fun onResponse( //Callback 익명클래스 선언
-                call: Call<ResponseSignIn>,
-                response: Response<ResponseSignIn>
+                call: Call<ResponseWrapper<ResponseSignIn>>,
+                response: Response<ResponseWrapper<ResponseSignIn>>
             ) {
                 if (response.isSuccessful) {
                     val data = response.body()?.data //null값 올 수 있으므로 nullable 타입
@@ -79,7 +80,7 @@ class SignInActivity : AppCompatActivity() {
                     .show()
             }
 
-            override fun onFailure(call: Call<ResponseSignIn>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseWrapper<ResponseSignIn>>, t: Throwable) {
                 Log.e("NetworkTest", "error:$t") //오류처리 코드
             }
         })
