@@ -19,6 +19,7 @@ import com.example.a220402.response.ResponseSignIn
 import com.example.a220402.databinding.ActivitySignInBinding
 import com.example.a220402.request.RequestSignUp
 import com.example.a220402.response.ResponseWrapper
+import com.example.a220402.util.LoginSharedPreferences
 import com.example.a220402.util.ServiceCreator
 
 class SignInActivity : AppCompatActivity() {
@@ -41,7 +42,13 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater) //inflate는 xml의 뷰를 객체화해준다고 생각하자
         setContentView(binding.root)
 
-        binding.btn.setOnClickListener() {
+        setOnClickListener()
+        initClickEvent()
+        isAutoLogin()
+
+    }
+    private fun setOnClickListener() {
+        binding.btn.setOnClickListener {
             if (binding.etId.text.isNullOrBlank() || binding.etPw.text.isNullOrBlank()) {
                 Toast.makeText(this, "아이디/비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
             } else {
@@ -49,10 +56,26 @@ class SignInActivity : AppCompatActivity() {
             }
         }
 
-        binding.btnSignup.setOnClickListener() {
+        binding.btnSignup.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             resultLauncher.launch(intent)
             //signup 버튼을 누르면 SignUpActivity로 이동, intent 객체를 lancher에 실어 이동.
+        }
+    }
+
+    private fun initClickEvent(){
+        binding.btnAutoLogin.setOnClickListener{
+            binding.btnAutoLogin.isSelected = !binding.btnAutoLogin.isSelected
+
+            LoginSharedPreferences.setAutoLogin(this, binding.btnAutoLogin.isSelected)
+        }
+    }
+
+    private fun isAutoLogin() {
+        if(LoginSharedPreferences.getAutoLogin(this)){
+            showToast("자동로그인 되었습니다")
+            startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+            finish()
         }
     }
 
