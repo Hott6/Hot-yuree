@@ -29,6 +29,7 @@
         <entry key="app/src/main/res/font/noto_sans_kr.xml" value="0.16018518518518518" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.16197916666666667" />
+        <entry key="app/src/main/res/layout/activity_mainsample.xml" value="0.15208333333333332" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.18016649329144022" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_camera.xml" value="0.1" />
