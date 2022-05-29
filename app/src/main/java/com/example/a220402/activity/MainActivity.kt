@@ -1,9 +1,14 @@
-package com.example.a220402
+package com.example.a220402.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.example.a220402.R
+import com.example.a220402.adapter.TestViewAdapter
 import com.example.a220402.databinding.ActivityMainBinding
+import com.example.a220402.fragment.CameraFragment
+import com.example.a220402.fragment.HomeFragment
+import com.example.a220402.fragment.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -19,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initAdapter() {
-        val fragmentList = listOf(ProfileFragment(),HomeFragment(), CameraFragment())
+        val fragmentList = listOf(ProfileFragment(), HomeFragment(), CameraFragment())
         testViewAdapter = TestViewAdapter(this)
         testViewAdapter.fragments.addAll(fragmentList)
 

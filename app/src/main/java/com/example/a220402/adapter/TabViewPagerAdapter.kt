@@ -1,7 +1,9 @@
-package com.example.a220402
+package com.example.a220402.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.a220402.fragment.HomeFollowerFragment
+import com.example.a220402.fragment.HomeFollowingFragment
 
 class TabViewPagerAdapter(fragment: Fragment) :
     FragmentStateAdapter(fragment) {
@@ -11,8 +13,8 @@ class TabViewPagerAdapter(fragment: Fragment) :
 
     override fun createFragment(position: Int): Fragment {
     return when (position) {
-        FOLLOWING_FRAGMENT -> TabFragment1()
-        FOLLOWER_FRAGMENT -> TabFragment2()
+        FOLLOWING_FRAGMENT -> HomeFollowingFragment()
+        FOLLOWER_FRAGMENT -> HomeFollowerFragment()
         else -> throw IndexOutOfBoundsException()
     }
 }

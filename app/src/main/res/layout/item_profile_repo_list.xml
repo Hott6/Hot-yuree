@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginVertical="5dp"
+        android:layout_marginHorizontal="10dp"
         android:fontFamily="@font/noto_sans_kr_bold"
         android:includeFontPadding="false"
         android:textColor="@color/black"
@@ -22,11 +23,13 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="안드로이드 과제 레포지토리" />
 
+
     <TextView
         android:id="@+id/tv_repointro"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginVertical="5dp"
+        android:layout_marginHorizontal="10dp"
         android:ellipsize="end"
         android:fontFamily="@font/noto_sans_kr_light"
         android:includeFontPadding="false"
