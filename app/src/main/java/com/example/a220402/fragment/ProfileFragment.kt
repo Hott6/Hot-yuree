@@ -1,5 +1,6 @@
 package com.example.a220402.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.a220402.R
+import com.example.a220402.activity.SettingActivity
 import com.example.a220402.databinding.FragmentProfileBinding
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -21,6 +23,7 @@ class ProfileFragment : Fragment() {
     ): View? {
         _binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
 
+        clickEvent()
         initTransactionEvent()
         initImage() //return 전에 작성해줘야 한다
 
@@ -32,6 +35,13 @@ class ProfileFragment : Fragment() {
             .load(R.drawable.uxri)
             .circleCrop()
             .into(binding.image)
+    }
+
+    private fun clickEvent(){
+        binding.btnSetting.setOnClickListener {
+            val intent = Intent(activity, SettingActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     fun initTransactionEvent() {

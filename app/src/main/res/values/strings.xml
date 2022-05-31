@@ -2,4 +2,10 @@
     <string name="app_name">220402</string>
     <string name="profile">이름 : 최유리\n나이 : 빠른.. 23살\nMBTI : ESFP\n </string>
     <string name="auto_login">자동 로그인</string>
+    <string name="onboarding_kr">온보딩</string>
+    <string name="welcome_github">Github에 오신 걸\n 환영합니다!</string>
+    <string name="enjoy_github">Github에서 즐거운 시간\n 보내시길 바랍니다!</string>
+    <string name="setting_kr">환경설정</string>
+    <string name="auto_login_off">자동 로그인 해제</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -8,10 +8,6 @@ object LoginSharedPreferences {
     private const val AUTO_LOGIN = "AUTO_LOGIN"
     private lateinit var preferences: SharedPreferences
 
-//    fun init(context: Context) { //기본으로 초기화
-//        preferences = context.getSharedPreferences(STORAGE_KEY, Context.MODE_PRIVATE)
-//    }
-
     fun getSharedPreference(context: Context): SharedPreferences {
         return context.getSharedPreferences(STORAGE_KEY, Context.MODE_PRIVATE)
     }
@@ -26,10 +22,11 @@ object LoginSharedPreferences {
             .apply()
     }
 
-    fun setLogout(context: Context) {
+    fun setLogout(context: Context):Boolean{
         getSharedPreference(context).edit()
             .remove(AUTO_LOGIN)
             .clear()
             .apply()
+        return getSharedPreference(context).getBoolean(AUTO_LOGIN, false)
     }
 }
