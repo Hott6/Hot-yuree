@@ -28,8 +28,9 @@
         <entry key="app/src/main/res/drawable/round.xml" value="0.1" />
         <entry key="app/src/main/res/font/noto_sans_kr.xml" value="0.16018518518518518" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.16197916666666667" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.10857142857142857" />
         <entry key="app/src/main/res/layout/activity_mainsample.xml" value="0.15208333333333332" />
+        <entry key="app/src/main/res/layout/activity_onboarding.xml" value="0.10009057971014493" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.184375" />
         <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.18016649329144022" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.165" />
@@ -38,9 +39,9 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home_follower.xml" value="0.17239583333333333" />
         <entry key="app/src/main/res/layout/fragment_home_following.xml" value="0.21197916666666666" />
-        <entry key="app/src/main/res/layout/fragment_onboarding1.xml" value="0.2036285400390625" />
-        <entry key="app/src/main/res/layout/fragment_onboarding2.xml" value="0.24479166666666666" />
-        <entry key="app/src/main/res/layout/fragment_onboarding3.xml" value="0.24479166666666666" />
+        <entry key="app/src/main/res/layout/fragment_onboarding1.xml" value="0.15454545454545454" />
+        <entry key="app/src/main/res/layout/fragment_onboarding2.xml" value="0.12878787878787878" />
+        <entry key="app/src/main/res/layout/fragment_onboarding3.xml" value="0.12878787878787878" />
         <entry key="app/src/main/res/layout/fragment_one.xml" value="0.16197916666666667" />
         <entry key="app/src/main/res/layout/fragment_profile 2.xml" value="0.15833333333333333" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.23588709677419356" />

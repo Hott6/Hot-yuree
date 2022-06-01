@@ -1,6 +1,8 @@
 package com.example.a220402.activity
 
+import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.a220402.R
@@ -21,6 +23,10 @@ class MainActivity : AppCompatActivity() {
 
         initAdapter()
         initBottomNavi()
+    }
+
+    fun Context.showToast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
     private fun initAdapter() {
