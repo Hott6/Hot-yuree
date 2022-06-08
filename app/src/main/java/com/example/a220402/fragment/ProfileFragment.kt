@@ -1,5 +1,6 @@
 package com.example.a220402.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.a220402.R
+import com.example.a220402.activity.SettingActivity
 import com.example.a220402.databinding.FragmentProfileBinding
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -23,6 +25,7 @@ class ProfileFragment : Fragment() {
 
         initTransactionEvent()
         initImage() //return 전에 작성해줘야 한다
+        clickEvent()
 
         return binding.root
     }
@@ -34,7 +37,15 @@ class ProfileFragment : Fragment() {
             .into(binding.image)
     }
 
+    private fun clickEvent(){
+        binding.btnSetting.setOnClickListener {
+            val intent = Intent(context, SettingActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
     fun initTransactionEvent() {
+
         val fragment1 = ProfileFollowerFragment()
         val fragment2 = ProfileRepoFragment()
 
@@ -61,6 +72,7 @@ class ProfileFragment : Fragment() {
                 repobtn.isSelected = true
             }
         }
+
     }
 
     companion object {

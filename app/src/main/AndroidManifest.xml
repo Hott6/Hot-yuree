@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.220402"
         android:usesCleartextTraffic="true">
+
         <activity
             android:name=".activity.OnboardingActivity"
             android:exported="true">
@@ -30,6 +31,9 @@
             android:exported="false" />
         <activity
             android:name=".activity.MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.SettingActivity"
             android:exported="true" />
     </application>
 

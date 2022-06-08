@@ -24,11 +24,15 @@
         android:id="@+id/btn_next"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/gradient2"
+        android:background="@color/sopt_light_purple"
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="30dp"
-        android:text="다음으로"/>
+        android:layout_marginHorizontal="10dp"
+        android:textSize="20sp"
+        android:text="다음으로"
+        android:fontFamily="@font/noto_sans_kr"
+        android:includeFontPadding="false"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

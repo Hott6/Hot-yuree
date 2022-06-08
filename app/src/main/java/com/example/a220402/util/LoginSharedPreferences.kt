@@ -2,6 +2,7 @@ package com.example.a220402.util
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.a220402.activity.SettingActivity
 
 object LoginSharedPreferences {
     private const val STORAGE_KEY = "USER_AUTH"
@@ -22,7 +23,7 @@ object LoginSharedPreferences {
             .apply()
     }
 
-    fun setLogout(context: Context):Boolean{
+    fun setLogout(context: SettingActivity):Boolean{
         getSharedPreference(context).edit()
             .remove(AUTO_LOGIN)
             .clear()

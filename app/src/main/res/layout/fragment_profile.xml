@@ -38,7 +38,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.5" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <ImageButton
                 android:id="@+id/btn_setting"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
