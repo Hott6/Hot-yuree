@@ -1444,4 +1444,313 @@ binding.btnFinshSignup.setOnClickListener
 ### 10. 꿀팁 아닌 꿀팁
  - Local History로 되돌리기가 가능합니다
  - command + F로 뭐 예를 들어 ResponseUserInfo가 있는 내용을 찾고싶다, 하면 바로 검색이 가능합니다.
-    
+---
+# Seminar 7
+
+## - 필수과제 1-1 :  자동 로그인 구현
+### 💜 LoginSharedPreferences
+```kotlin
+import ...
+
+object LoginSharedPreferences {
+    private const val STORAGE_KEY = "USER_AUTH"
+    private const val AUTO_LOGIN = "AUTO_LOGIN"
+    private lateinit var preferences: SharedPreferences
+
+    fun getSharedPreference(context: Context): SharedPreferences {
+        return context.getSharedPreferences(STORAGE_KEY, Context.MODE_PRIVATE)
+    }
+
+    fun getAutoLogin(context: Context): Boolean {
+        return getSharedPreference(context).getBoolean(AUTO_LOGIN, false)
+    }
+
+    fun setAutoLogin(context: Context, value: Boolean) {
+        getSharedPreference(context).edit()
+            .putBoolean(AUTO_LOGIN, value)
+            .apply()
+    }
+
+    fun setLogout(context: SettingActivity):Boolean{
+        getSharedPreference(context).edit()
+            .remove(AUTO_LOGIN)
+            .clear()
+            .apply()
+        return getSharedPreference(context).getBoolean(AUTO_LOGIN, false)
+    }
+}
+```
+- 앱 전역에서 호출되기 때문에 Object 키워드로 싱글톤으로 만들어준다.
+- `private const val STORAGE_KEY = "USER_AUTH"` : 키 값을 상수화
+- get()은 값을 읽어오는 것, set()은 값을 작성하는 것
+- 자동로그인, 자동로그인 해제 내용 구현
+
+### 💜 selector_login
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_checkbox_on" android:state_selected="true" />
+    <item android:drawable="@drawable/ic_checkbox_off" android:state_selected="false"/>
+</selector>
+```
+### 💜 SignInActivity
+```kotlin
+...
+private fun initClickEvent(){
+        binding.btnAutoLogin.setOnClickListener{
+            binding.btnAutoLogin.isSelected = !binding.btnAutoLogin.isSelected
+
+            LoginSharedPreferences.setAutoLogin(this, binding.btnAutoLogin.isSelected)
+        }
+    }
+
+    private fun isAutoLogin() {
+        if(LoginSharedPreferences.getAutoLogin(this)){
+            showToast("자동로그인 되었습니다")
+            startActivity(Intent(this@SignInActivity, MainActivity::class.java))
+            finish()
+        }
+    }
+...
+```
+- 자동로그인 버튼 클릭 시 자동로그인 실행
+- 자동로그인 성공 시 토스트 메시지 출력하고 `MainActivity`로 이동
+
+ ## - 필수과제 1-2 :  자동 로그인 해제 구현
+### 💜 SettingActivity 
+```kotlin
+import...
+
+class SettingActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySettingBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivitySettingBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        setLogout()
+    }
+
+    private fun setLogout() {
+        binding.btnLogout.setOnClickListener {
+            LoginSharedPreferences.setLogout(this)
+            showToast("자동로그인 해제되었습니다")
+            val intent = Intent(this, SignInActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    fun Context.showToast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+    }
+}
+```
+- 버튼 눌렀을 떄 자동로그인 해제 및 토스트 출력, `SignInActivity`로 이동
+
+### 💜 ProfileFragment
+```kotlin
+private fun clickEvent(){
+        binding.btnSetting.setOnClickListener {
+            val intent = Intent(context, SettingActivity::class.java)
+            startActivity(intent)
+        }
+    }
+```
+- setting 버튼 클릭 시 SettingActivity로 이동
+---
+
+ ## - 성장과제 :  온보딩화면 만들기
+### 💜 activity_onboarding
+ ```xml
+ <?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.OnboardingActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:elevation="3dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="온보딩"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fcv_onboarding"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cl_title"
+        app:navGraph="@navigation/nav_onboarding"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+ ```
+- `androidx.constraintlayout.widget.ConstraintLayout`에 온보딩 내용 고정
+- `FragmentContainerView`에 `NavHostFragment` 지정
+- `android:name` = NavHost지정을 위한 NavHostFragment 클래스 설정
+- `app:defaultnavHost` = NavHostFragment가 백버튼 로직을 가로챌 수 있게 해주는 속성 
+- `app:navGraph` = NavHostFragment를 NavigationGraph와 연결하는 속성
+
+### 💜 Onboarding1fragment
+```kotlin
+...
+    private fun onboarding(){
+        binding.btnNext.setOnClickListener {
+            findNavController().navigate(R.id.action_onboarding1Fragment_to_onboarding2Fragment)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+}
+```
+- next 버튼 누르면 다음 프래그먼트로 연결 (다른 프래그먼트도 같은 방식으로 진행)
+
+### 💜 OnboardingActivity
+```kotlin
+package com.example.a220402.activity
+
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.example.a220402.R
+import com.example.a220402.databinding.ActivityOnboardingBinding
+import kotlinx.android.synthetic.main.fragment_onboarding1.view.*
+
+class OnboardingActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityOnboardingBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_onboarding)
+    }
+
+    override fun finish() {
+        if (binding.fcvOnboarding.btn_next.isSelected)
+        super.finish()
+    }
+}
+```
+- 마지막 next button이 클릭되면 끝나도록 설정했는데 확실히 맞는지는 모르겠다.. 좀 더 공부해봐야겠습니다!
+
+### 💜 nav_onboarding
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_onboarding"
+    app:startDestination="@id/onboarding1Fragment">
+
+    <fragment
+        android:id="@+id/onboarding1Fragment"
+        android:name="com.example.a220402.fragment.Onboarding1Fragment"
+        android:label="fragment_onboarding1"
+        tools:layout="@layout/fragment_onboarding1" >
+        <action
+            android:id="@+id/action_onboarding1Fragment_to_onboarding2Fragment"
+            app:destination="@id/onboarding2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/onboarding2Fragment"
+        android:name="com.example.a220402.fragment.Onboarding2Fragment"
+        android:label="fragment_onboarding2"
+        tools:layout="@layout/fragment_onboarding2" >
+        <action
+            android:id="@+id/action_onboarding2Fragment_to_onboarding3Fragment"
+            app:destination="@id/onboarding3Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/onboarding3Fragment"
+        android:name="com.example.a220402.fragment.Onboarding3Fragment"
+        android:label="fragment_onboarding3"
+        tools:layout="@layout/fragment_onboarding3" >
+        <action
+            android:id="@+id/action_onboarding3Fragment_to_signInActivity"
+            app:destination="@id/signInActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/signInActivity"
+        android:name="com.example.a220402.activity.SignInActivity"
+        android:label="activity_sign_in"
+        tools:layout="@layout/activity_sign_in" />
+</navigation>
+```
+- 드래그 앤 드롭으로 연결했을 때 자동으로 생성되는 xml 파일!
+
+
+---
+# **실행 화면**
+| 자동로그인 | 자동로그인 해제 | 온보딩 |
+|:---:|:---:|:---:|
+|<img src="https://user-images.githubusercontent.com/102457223/172651116-29251205-5641-4756-b8dd-523b54e0c731.gif" width="200" height="300"/>|<img src="https://user-images.githubusercontent.com/102457223/172651145-76a08f9b-5ad6-4b85-b231-8fdbc7c9436b.gif" width="200" height="300"/>|<img src="https://user-images.githubusercontent.com/102457223/172651075-6c971e45-6c75-466f-8c2d-4aad4dae9409.gif" width="200" height="300"/>|
+---
+
+## 💙 Seminar 7에서 배운 내용
+
+### 1. Fragment -> Activity 이동 시
+- 자동로그인 해제 구현 할 때, ProfileFragment에서 SettingActivity로 넘어가지 않았다. 
+
+```kotlin
+private fun clickEvent(){
+        binding.btnSetting.setOnClickListener {
+            val intent = Intent(context, SettingActivity::class.java)
+            startActivity(intent)
+        }
+    }
+```
+- 위 코드와 같이 함수를 생성하고 호출해주었는데도 안 됐다. 그래서 액티비티 문제인가 싶어서 액티비티를 다른 액티비티로 바꾸어 해봤는데 그건 성공해서 SettingActivity 문제인 것을 깨닫고 이유를 찾아보았는데, 문제는 manifests에 있었다.
+```kotlin
+<activity
+            android:name=".activity.SettingActivity"
+            android:exported="true" />
+```
+manifests에 이 내용을 다시 추가해주고 빌드하니 성공했다. 다음에 새로 액티비티 만들면 꼭 manifests 확인하자..
+
+### 2. get()과 set()
+```kotlin
+fun getAutoLogin(context: Context): Boolean {
+        return getSharedPreference(context).getBoolean(AUTO_LOGIN, false)
+    }
+
+    fun setAutoLogin(context: Context, value: Boolean) {
+        getSharedPreference(context).edit()
+            .putBoolean(AUTO_LOGIN, value)
+            .apply()
+    }
+```
+- get()은 값을 읽어오는 것, set()은 값을 작성하는 것
+
+### 3. object LoginSharedPreferences
+- 앱 전역에서 호출되기 때문에 Object 키워드로 싱글톤으로 만들어줘야 한다.
+
+### 4. Singleton Pattern
+- 어플리케이션이 시작될 때 어떤 클래스가 최초 한번만 메모리를 할당하고 그 메모리에 인스턴스르 만들어 사용하는 디자인 패턴이다.
+- 인스턴스가 1개만 생성되는 특징을 가진 이 패턴을 이용하면, 하나의 인스턴스를 메모리에 등록해서 여러 쓰레드가 동시에 해당 인스턴스를 공유하여 사용할 수 있게끔 할 수 있기 때문에 요청이 많은 곳에서 사용하면 효율이 높아진다.
+
+### 5. Onboarding fragment 이동
+```kotlin
+findNavController().navigate(R.id.action_onboarding1Fragment_to_onboarding2Fragment)
+```
+- 프래그먼트 전환 로직 (NavController)
