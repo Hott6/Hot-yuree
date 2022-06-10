@@ -21,7 +21,7 @@ class SettingActivity : AppCompatActivity() {
 
     private fun setLogout() {
         binding.btnLogout.setOnClickListener {
-            LoginSharedPreferences.setLogout(this)
+            LoginSharedPreferences.setLogout()
             showToast("자동로그인 해제되었습니다")
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)

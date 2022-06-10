@@ -14,11 +14,13 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.room.Room
 import com.example.a220402.request.RequestSignIn
 import com.example.a220402.response.ResponseSignIn
 import com.example.a220402.databinding.ActivitySignInBinding
 import com.example.a220402.request.RequestSignUp
 import com.example.a220402.response.ResponseWrapper
+import com.example.a220402.room.AppDatabase
 import com.example.a220402.util.LoginSharedPreferences
 import com.example.a220402.util.ServiceCreator
 
@@ -41,6 +43,13 @@ class SignInActivity : AppCompatActivity() {
 
         binding = ActivitySignInBinding.inflate(layoutInflater) //inflate는 xml의 뷰를 객체화해준다고 생각하자
         setContentView(binding.root)
+
+//        val database = Room.databaseBuilder(this, AppDatabase::class.java, "test")
+//            .build()
+//        if(database.authorizationDao().getAuthorization("kkk").autoLogin) {
+//            startActivity(Intent(this, MainActivity::class.java))
+//            finish()
+//        }
 
         setOnClickListener()
         initClickEvent()
@@ -72,7 +81,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun isAutoLogin() {
-        if(LoginSharedPreferences.getAutoLogin(this)){
+        if(LoginSharedPreferences.getAutoLogin()){
             showToast("자동로그인 되었습니다")
             startActivity(Intent(this@SignInActivity, MainActivity::class.java))
             finish()

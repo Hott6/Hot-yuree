@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.a220402.R
 import com.example.a220402.databinding.ActivityOnboardingBinding
+import com.example.a220402.util.LoginSharedPreferences
 import kotlinx.android.synthetic.main.fragment_onboarding1.view.*
 
 class OnboardingActivity : AppCompatActivity() {
@@ -12,6 +13,7 @@ class OnboardingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_onboarding)
+        LoginSharedPreferences.init(this)
     }
 
     override fun finish() {
