@@ -1754,3 +1754,19 @@ fun getAutoLogin(context: Context): Boolean {
 findNavController().navigate(R.id.action_onboarding1Fragment_to_onboarding2Fragment)
 ```
 - 프래그먼트 전환 로직 (NavController)
+
+### 6. init
+```kotlin
+ fun init(context: Context) {
+        preferences = context.getSharedPreferences(STORAGE_KEY, Context.MODE_PRIVATE)
+    }
+```
+- LoginSharedPreferences에서 init을 실행시키려면!
+```kotlin
+override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_onboarding)
+        LoginSharedPreferences.init(this)
+    }
+```
+- 처음 시작하는 뷰인 OnboardingActivity에서 init 호출을 해줘야한댜 !!
