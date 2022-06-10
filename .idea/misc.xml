@@ -26,6 +26,7 @@
         <entry key="app/src/main/res/drawable/ic_union_purple.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rectangle_radius_5.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/round.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/selector_login.xml" value="0.109" />
         <entry key="app/src/main/res/font/noto_sans_kr.xml" value="0.16018518518518518" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10857142857142857" />
@@ -41,7 +42,7 @@
         <entry key="app/src/main/res/layout/fragment_home_following.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/layout/fragment_onboarding1.xml" value="0.15454545454545454" />
         <entry key="app/src/main/res/layout/fragment_onboarding2.xml" value="0.12878787878787878" />
-        <entry key="app/src/main/res/layout/fragment_onboarding3.xml" value="0.12878787878787878" />
+        <entry key="app/src/main/res/layout/fragment_onboarding3.xml" value="0.19961700439453128" />
         <entry key="app/src/main/res/layout/fragment_one.xml" value="0.16197916666666667" />
         <entry key="app/src/main/res/layout/fragment_profile 2.xml" value="0.15833333333333333" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.23588709677419356" />

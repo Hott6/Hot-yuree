@@ -44,13 +44,6 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater) //inflate는 xml의 뷰를 객체화해준다고 생각하자
         setContentView(binding.root)
 
-//        val database = Room.databaseBuilder(this, AppDatabase::class.java, "test")
-//            .build()
-//        if(database.authorizationDao().getAuthorization("kkk").autoLogin) {
-//            startActivity(Intent(this, MainActivity::class.java))
-//            finish()
-//        }
-
         setOnClickListener()
         initClickEvent()
         isAutoLogin()
