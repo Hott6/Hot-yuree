@@ -18,14 +18,14 @@ object LoginSharedPreferences {
     }
 
     fun setAutoLogin(context: Context, value: Boolean) {
-        preferences.edit(commit = true) { putBoolean("key", value) } //Android KTX 사용
+        preferences.edit(commit = true) { putBoolean("AUTO_LOGIN", value) } //Android KTX 사용
     }
 
-    fun setLogout():Boolean{
-        preferences.edit()
-            .remove(AUTO_LOGIN)
-            .clear()
-            .apply()
+    fun setLogout(): Boolean {
+        preferences.edit(commit = true) {
+            remove("AUTO_LOGIN")
+            clear()
+        }
         return preferences.getBoolean(AUTO_LOGIN, false)
     }
 }
