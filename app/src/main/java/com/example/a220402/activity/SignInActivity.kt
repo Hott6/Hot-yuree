@@ -23,6 +23,7 @@ import com.example.a220402.response.ResponseWrapper
 import com.example.a220402.room.AppDatabase
 import com.example.a220402.util.LoginSharedPreferences
 import com.example.a220402.util.ServiceCreator
+import com.example.a220402.util.showToast
 
 class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignInBinding
@@ -44,15 +45,15 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater) //inflate는 xml의 뷰를 객체화해준다고 생각하자
         setContentView(binding.root)
 
-        setOnClickListener()
+        setOnLoginBtnClickListener()
         initClickEvent()
         isAutoLogin()
 
     }
-    private fun setOnClickListener() {
+    private fun setOnLoginBtnClickListener() {
         binding.btn.setOnClickListener {
             if (binding.etId.text.isNullOrBlank() || binding.etPw.text.isNullOrBlank()) {
-                Toast.makeText(this, "아이디/비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
+                showToast("아이디/비밀번호를 확인해주세요")
             } else {
                 loginNetwork() // 로그인 버튼 눌렀을 때 빈칸이 아닌 경우 서버통신 이루어짐
             }
@@ -98,10 +99,6 @@ class SignInActivity : AppCompatActivity() {
                 showToast("로그인에 실패하였습니다")
             }
         )
-    }
-
-    fun Context.showToast(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
     fun <ResponseType> Call<ResponseType>.enqueueUtil(

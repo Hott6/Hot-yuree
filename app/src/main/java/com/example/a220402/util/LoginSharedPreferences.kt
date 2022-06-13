@@ -2,6 +2,7 @@ package com.example.a220402.util
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.core.content.edit
 
 object LoginSharedPreferences {
     private const val STORAGE_KEY = "USER_AUTH"
@@ -17,9 +18,7 @@ object LoginSharedPreferences {
     }
 
     fun setAutoLogin(context: Context, value: Boolean) {
-        preferences.edit()
-            .putBoolean(AUTO_LOGIN, value)
-            .apply()
+        preferences.edit(commit = true) { putBoolean("key", value) } //Android KTX 사용
     }
 
     fun setLogout():Boolean{

@@ -1,15 +1,14 @@
 package com.example.a220402.activity
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.a220402.databinding.ActivitySignUpBinding
 import com.example.a220402.request.RequestSignUp
 import com.example.a220402.util.ServiceCreator
+import com.example.a220402.util.showToast
 import kotlinx.android.synthetic.main.activity_sign_in.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,7 +28,7 @@ class SignUpActivity : AppCompatActivity() {
     private fun clickEvent() {
         binding.btnFinshSignup.setOnClickListener {
             if (binding.etName.text.isNullOrBlank() || binding.etId.text.isNullOrBlank() || binding.etPw.text.isNullOrBlank()) {
-                Toast.makeText(this, "입력되지 않은 정보가 있습니다", Toast.LENGTH_SHORT).show()
+                showToast("입력되지 않은 정보가 있습니다")
             } else {
                 val intent = Intent(this@SignUpActivity, SignInActivity::class.java)
                 intent.putExtra("id", et_id.text.toString()) //id에 et_id 데이터 담음
@@ -60,10 +59,6 @@ class SignUpActivity : AppCompatActivity() {
                 showToast("회원가입에 실패하였습니다")
             }
         )
-    }
-
-    fun Context.showToast(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
     fun <ResponseType> Call<ResponseType>.enqueueUtil(
