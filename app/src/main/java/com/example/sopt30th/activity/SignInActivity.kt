@@ -18,6 +18,7 @@ import com.example.sopt30th.response.ResponseSignIn
 import com.example.sopt30th.response.ResponseWrapper
 import com.example.sopt30th.util.LoginSharedPreferences
 import com.example.sopt30th.util.ServiceCreator
+import com.example.sopt30th.util.enqueueUtil
 import com.example.sopt30th.util.showToast
 
 class SignInActivity : AppCompatActivity() {
@@ -91,33 +92,12 @@ class SignInActivity : AppCompatActivity() {
         call.enqueueUtil(
             onSuccess = {
                 showToast("로그인에 성공하였습니다")
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
             },
             onError = {
                 showToast("로그인에 실패하였습니다")
             }
         )
-    }
-
-    fun <ResponseType> Call<ResponseType>.enqueueUtil(
-        onSuccess: (ResponseType) -> Unit,
-        onError: ((stateCode: Int) -> Unit)? = null
-    ) {
-        this.enqueue(object : Callback<ResponseType> {
-            override fun onResponse(
-                call: Call<ResponseType>,
-                response: Response<ResponseType>
-            ) {
-                if (response.isSuccessful) {
-                    onSuccess.invoke((response.body() ?: return))
-                    startActivity(Intent(this@SignInActivity, MainActivity::class.java))
-                } else {
-                    onError?.invoke(response.code())
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseType>, t: Throwable) {
-                Log.d("NetWorkTest", "error:$t")
-            }
-        })
     }
 }

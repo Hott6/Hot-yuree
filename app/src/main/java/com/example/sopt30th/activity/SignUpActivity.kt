@@ -3,16 +3,13 @@ package com.example.sopt30th.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.sopt30th.databinding.ActivitySignUpBinding
 import com.example.sopt30th.request.RequestSignUp
 import com.example.sopt30th.util.ServiceCreator
+import com.example.sopt30th.util.enqueueUtil
 import com.example.sopt30th.util.showToast
 import kotlinx.android.synthetic.main.activity_sign_in.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
@@ -54,30 +51,12 @@ class SignUpActivity : AppCompatActivity() {
         call.enqueueUtil(
             onSuccess = {
                 it.data
+                val intent = Intent(this, SignInActivity::class.java)
+                startActivity(intent)
             },
             onError = {
                 showToast("회원가입에 실패하였습니다")
             }
         )
-    }
-
-    fun <ResponseType> Call<ResponseType>.enqueueUtil(
-        onSuccess: (ResponseType) -> Unit,
-        onError: ((stateCode: Int) -> Unit)? = null
-    ) {
-        this.enqueue(object : Callback<ResponseType> {
-            override fun onResponse(call: Call<ResponseType>, response: Response<ResponseType>) {
-                if (response.isSuccessful) {
-                    onSuccess.invoke((response.body() ?: return))
-                    startActivity(Intent(this@SignUpActivity, MainActivity::class.java))
-                } else {
-                    onError?.invoke(response.code())
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseType>, t: Throwable) {
-                Log.d("NetWorkTest", "error:$t")
-            }
-        })
     }
 }
