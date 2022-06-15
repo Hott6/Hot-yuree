@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/onboarding1Fragment"
-        android:name="com.example.a220402.fragment.Onboarding1Fragment"
+        android:name="com.example.sopt30th.fragment.Onboarding1Fragment"
         android:label="fragment_onboarding1"
         tools:layout="@layout/fragment_onboarding1" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/onboarding2Fragment"
-        android:name="com.example.a220402.fragment.Onboarding2Fragment"
+        android:name="com.example.sopt30th.fragment.Onboarding2Fragment"
         android:label="fragment_onboarding2"
         tools:layout="@layout/fragment_onboarding2" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/onboarding3Fragment"
-        android:name="com.example.a220402.fragment.Onboarding3Fragment"
+        android:name="com.example.sopt30th.fragment.Onboarding3Fragment"
         android:label="fragment_onboarding3"
         tools:layout="@layout/fragment_onboarding3" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <activity
         android:id="@+id/signInActivity"
-        android:name="com.example.a220402.activity.SignInActivity"
+        android:name="com.example.sopt30th.activity.SignInActivity"
         android:label="activity_sign_in"
         tools:layout="@layout/activity_sign_in" />
 </navigation>

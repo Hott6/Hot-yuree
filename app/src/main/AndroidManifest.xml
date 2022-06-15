@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.a220402">
+    package="com.example.sopt30th">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -15,7 +15,7 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name=".activity.OnboardingActivity"
+            android:name="com.example.sopt30th.activity.OnboardingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,16 +24,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.SignInActivity"
+            android:name="com.example.sopt30th.activity.SignInActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.SignUpActivity"
+            android:name="com.example.sopt30th.activity.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.example.sopt30th.activity.MainActivity"
             android:exported="true" />
         <activity
-            android:name=".activity.SettingActivity"
+            android:name="com.example.sopt30th.activity.SettingActivity"
             android:exported="true" />
     </application>
 

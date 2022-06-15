@@ -24,6 +24,10 @@
         <entry key="app/src/main/res/drawable/ic_setting.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_union.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_union_purple.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/img_circle.xml" value="0.109" />
+        <entry key="app/src/main/res/drawable/img_rectangle_crop.xml" value="0.109" />
+        <entry key="app/src/main/res/drawable/img_shape_circle.xml" value="0.109" />
+        <entry key="app/src/main/res/drawable/img_uxri_circle.xml" value="0.109" />
         <entry key="app/src/main/res/drawable/rectangle_radius_5.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/round.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/selector_login.xml" value="0.109" />
