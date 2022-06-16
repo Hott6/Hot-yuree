@@ -34,7 +34,7 @@ class ProfileFollowerFragment : Fragment() {
     }
 
     private fun initUserInfoNetwork() {
-        val call: Call<List<ResponseUserInfo>> = ServiceCreator.githubApiService.getFollowingInfo()
+        val call: Call<List<ResponseUserInfo>> = ServiceCreator.githubApiService.getFollowerInfo()
 
         call.enqueue(object : Callback<List<ResponseUserInfo>> {
             override fun onResponse(

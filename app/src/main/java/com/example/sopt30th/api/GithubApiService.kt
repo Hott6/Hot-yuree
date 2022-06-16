@@ -7,6 +7,9 @@ import retrofit2.http.GET
 
 interface GithubApiService{
     @GET("users/uxri/followers")
+    fun getFollowerInfo(): Call<List<ResponseUserInfo>>
+
+    @GET("users/uxri/following")
     fun getFollowingInfo(): Call<List<ResponseUserInfo>>
 
     @GET("users/uxri/repos")
