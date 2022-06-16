@@ -28,6 +28,7 @@ class Onboarding3Fragment : Fragment() {
     private fun onboarding() {
         binding.btnNext.setOnClickListener {
             findNavController().navigate(R.id.action_onboarding3Fragment_to_signInActivity)
+            requireActivity().finish()
         }
     }
 
