@@ -28,7 +28,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.25" />
-        //src를 지웠습니다... src는 처음에만 뜨게됨
 
         <TextView
             android:id="@+id/tv_name"
@@ -41,6 +40,8 @@
             android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold"
+            android:ellipsize="end"
+            android:maxLines="1"
             app:layout_constraintBottom_toBottomOf="@id/iv_profile"
             app:layout_constraintStart_toEndOf="@+id/iv_profile"
             app:layout_constraintTop_toTopOf="@+id/iv_profile"
