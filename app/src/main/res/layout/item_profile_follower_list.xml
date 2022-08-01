@@ -39,7 +39,7 @@
             android:includeFontPadding="false"
             android:text="@{follower.login}"
             android:textColor="@color/black"
-            android:textSize="25sp"
+            android:textSize="25dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/iv_profile"
             app:layout_constraintStart_toEndOf="@+id/iv_profile"

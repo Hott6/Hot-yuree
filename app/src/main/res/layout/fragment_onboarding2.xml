@@ -21,7 +21,7 @@
             android:gravity="center"
             android:text="@string/enjoy_github"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="20dp"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -36,7 +36,7 @@
             android:fontFamily="@font/noto_sans_kr"
             android:includeFontPadding="false"
             android:text="다음으로"
-            android:textSize="20sp"
+            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintStart_toEndOf="parent" />

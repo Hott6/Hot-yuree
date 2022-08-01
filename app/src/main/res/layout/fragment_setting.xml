@@ -20,7 +20,7 @@
             android:gravity="center"
             android:text="@string/setting_kr"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="20dp"
             app:layout_constraintEnd_toStartOf="parent"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -39,7 +39,7 @@
             android:background="@color/white"
             android:gravity="center"
             android:text="@string/auto_login_off"
-            android:textSize="20sp"
+            android:textSize="20dp"
             app:layout_constraintTop_toBottomOf="@id/v_line1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

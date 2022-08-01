@@ -23,7 +23,7 @@
         android:text="SOPT"
         android:fontFamily="@font/noto_sans_kr_bold"
         android:includeFontPadding="false"
-        android:textSize="35sp"
+        android:textSize="35dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
         android:fontFamily="@font/noto_sans_kr_bold"
         android:includeFontPadding="false"
         android:text="이메일"
-        android:textSize="20sp"
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,7 +62,7 @@
         android:fontFamily="@font/noto_sans_kr_bold"
         android:includeFontPadding="false"
         android:text="비밀번호"
-        android:textSize="20sp"
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -95,7 +95,7 @@
         android:text="@string/auto_login"
         android:fontFamily="@font/noto_sans_kr"
         android:textColor="@color/black"
-        android:textSize="18sp"
+        android:textSize="18dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintTop_toBottomOf="@id/et_pw"
         app:layout_constraintBottom_toTopOf="@id/btn"
@@ -110,7 +110,7 @@
         android:fontFamily="@font/noto_sans_kr_bold"
         android:includeFontPadding="false"
         android:text="LOGIN"
-        android:textSize="20sp"
+        android:textSize="20dp"
         app:layout_constraintTop_toBottomOf="@+id/et_pw" />
 
     <Button
@@ -122,7 +122,7 @@
         android:fontFamily="@font/noto_sans_kr_bold"
         android:includeFontPadding="false"
         android:text="회원가입"
-        android:textSize="20sp"
+        android:textSize="20dp"
         app:layout_constraintTop_toBottomOf="@+id/btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,7 +30,7 @@
             android:gravity="center"
             android:includeFontPadding="false"
             android:text="GitHub"
-            android:textSize="30sp"
+            android:textSize="30dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
