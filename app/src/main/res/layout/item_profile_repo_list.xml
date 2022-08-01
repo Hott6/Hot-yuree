@@ -6,7 +6,7 @@
     <data>
         <variable
             name="repo"
-            type="com.example.sopt30th.response.ResponseRepoInfo" />
+            type="com.example.sopt30th.data.model.response.ResponseRepoInfo" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,7 +31,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="안드로이드 과제 레포지토리" />
-
 
     <TextView
         android:id="@+id/tv_repointro"

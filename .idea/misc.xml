@@ -38,7 +38,7 @@
         <entry key="app/src/main/res/layout/activity_mainsample.xml" value="0.15208333333333332" />
         <entry key="app/src/main/res/layout/activity_onboarding.xml" value="0.10009057971014493" />
         <entry key="app/src/main/res/layout/activity_setting.xml" value="0.184375" />
-        <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.18016649329144022" />
+        <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.12510986328125" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_camera.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_follower.xml" value="0.165" />
@@ -61,7 +61,7 @@
         <entry key="app/src/main/res/layout/item_home_follower_list.xml" value="0.10099637681159421" />
         <entry key="app/src/main/res/layout/item_home_following_list.xml" value="0.22056159420289856" />
         <entry key="app/src/main/res/layout/item_profile_follower_list.xml" value="0.31650485436893205" />
-        <entry key="app/src/main/res/layout/item_profile_repo_list.xml" value="0.24242424242424243" />
+        <entry key="app/src/main/res/layout/item_profile_repo_list.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_repo_list.xml" value="0.19740142822265627" />
         <entry key="app/src/main/res/layout/item_sample_list.xml" value="0.16197916666666667" />
         <entry key="app/src/main/res/menu/menu_sample.xml" value="0.1" />
