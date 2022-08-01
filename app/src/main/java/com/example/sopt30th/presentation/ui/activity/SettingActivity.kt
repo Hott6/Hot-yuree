@@ -18,6 +18,11 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>() {
         setLogout()
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
+
     private fun setLogout() {
         binding.btnLogout.setOnClickListener {
             LoginSharedPreferences.setLogout()
