@@ -1,28 +1,24 @@
 package com.example.sopt30th.presentation.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.sopt30th.R
 import com.example.sopt30th.databinding.FragmentOnboarding3Binding
+import com.example.sopt30th.presentation.ui.base.BaseFragment
 
-class Onboarding3Fragment : Fragment() {
-    private var _binding: FragmentOnboarding3Binding? = null
-    private val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다")
+class Onboarding3Fragment : BaseFragment<FragmentOnboarding3Binding>() {
+    override val TAG: String
+        get() = Onboarding3Fragment::class.java.simpleName
+    override val layoutRes: Int
+        get() = R.layout.fragment_onboarding3
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentOnboarding3Binding.inflate(layoutInflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         onboarding()
         initImage()
-        return binding.root
     }
 
     private fun onboarding() {
@@ -37,10 +33,5 @@ class Onboarding3Fragment : Fragment() {
             .load(R.drawable.uxri)
             .circleCrop()
             .into(binding.ivImage)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 }

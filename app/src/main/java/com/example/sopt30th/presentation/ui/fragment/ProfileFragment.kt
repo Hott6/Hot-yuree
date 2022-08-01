@@ -2,32 +2,27 @@ package com.example.sopt30th.presentation.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.sopt30th.R
-import com.example.sopt30th.presentation.ui.activity.SettingActivity
 import com.example.sopt30th.databinding.FragmentProfileBinding
+import com.example.sopt30th.presentation.ui.activity.SettingActivity
+import com.example.sopt30th.presentation.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_profile.*
 
-class ProfileFragment : Fragment() {
+class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     private var position = FOLLOWER_POSITION
-    private var _binding: FragmentProfileBinding? = null //fragment로 바꿨기 때문에 _binding
-    private val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다")
+    override val TAG: String
+        get() = ProfileFragment::class.java.simpleName
+    override val layoutRes: Int
+        get() = R.layout.fragment_profile
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         initTransactionEvent()
         initImage() //return 전에 작성해줘야 한다
         clickEvent()
-
-        return binding.root
     }
 
     private fun initImage() {
@@ -37,7 +32,7 @@ class ProfileFragment : Fragment() {
             .into(binding.image)
     }
 
-    private fun clickEvent(){
+    private fun clickEvent() {
         binding.btnSetting.setOnClickListener {
             val intent = Intent(context, SettingActivity::class.java)
             startActivity(intent)

@@ -1,35 +1,27 @@
 package com.example.sopt30th.presentation.ui.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.sopt30th.R
 import com.example.sopt30th.databinding.FragmentOnboarding2Binding
+import com.example.sopt30th.presentation.ui.base.BaseFragment
 
-class Onboarding2Fragment : Fragment() {
-    private var _binding: FragmentOnboarding2Binding? = null
-    private val binding get() = _binding ?: error("Binding이 초기화 되지 않았습니다")
+class Onboarding2Fragment : BaseFragment<FragmentOnboarding2Binding>() {
+    override val TAG: String
+        get() = Onboarding2Fragment::class.java.simpleName
+    override val layoutRes: Int
+        get() = R.layout.fragment_onboarding2
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentOnboarding2Binding.inflate(layoutInflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         onboarding()
-        return binding.root
     }
 
-    private fun onboarding(){
+    private fun onboarding() {
         binding.btnNext.setOnClickListener {
             findNavController().navigate(R.id.action_onboarding2Fragment_to_onboarding3Fragment)
         }
-    }
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 }
