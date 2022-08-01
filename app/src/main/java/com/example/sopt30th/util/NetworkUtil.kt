@@ -1,9 +1,9 @@
 package com.example.sopt30th.util
 
-import android.util.Log
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import timber.log.Timber
 
 fun <ResponseType> Call<ResponseType>.enqueueUtil(
     onSuccess: (ResponseType) -> Unit,
@@ -19,7 +19,7 @@ fun <ResponseType> Call<ResponseType>.enqueueUtil(
         }
 
         override fun onFailure(call: Call<ResponseType>, t: Throwable) {
-            Log.d("NetWorkTest", "error:$t")
+            Timber.e("Error")
         }
     })
 }

@@ -1,7 +1,7 @@
 package com.example.sopt30th.util
 
-import com.example.sopt30th.api.GithubApiService
-import com.example.sopt30th.api.SoptService
+import com.example.sopt30th.service.GithubApiService
+import com.example.sopt30th.service.SoptService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 //서비스를 생성해주는 구현체 부분
