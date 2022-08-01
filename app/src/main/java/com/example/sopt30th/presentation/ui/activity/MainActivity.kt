@@ -1,23 +1,22 @@
 package com.example.sopt30th.presentation.ui.activity
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.sopt30th.R
 import com.example.sopt30th.databinding.ActivityMainBinding
+import com.example.sopt30th.presentation.adapter.TestViewAdapter
+import com.example.sopt30th.presentation.ui.base.BaseActivity
 import com.example.sopt30th.presentation.ui.fragment.CameraFragment
 import com.example.sopt30th.presentation.ui.fragment.HomeFragment
 import com.example.sopt30th.presentation.ui.fragment.ProfileFragment
-import com.example.sopt30th.presentation.adapter.TestViewAdapter
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class MainActivity : BaseActivity<ActivityMainBinding>() {
+    override val layoutRes: Int
+        get() = R.layout.activity_main
     private lateinit var testViewAdapter: TestViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         initAdapter()
         initBottomNavi()

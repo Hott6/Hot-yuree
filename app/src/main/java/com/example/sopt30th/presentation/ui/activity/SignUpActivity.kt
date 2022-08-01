@@ -3,21 +3,21 @@ package com.example.sopt30th.presentation.ui.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.example.sopt30th.databinding.ActivitySignUpBinding
+import com.example.sopt30th.R
 import com.example.sopt30th.data.model.request.RequestSignUp
+import com.example.sopt30th.databinding.ActivitySignUpBinding
+import com.example.sopt30th.presentation.ui.base.BaseActivity
 import com.example.sopt30th.util.ServiceCreator
 import com.example.sopt30th.util.enqueueUtil
 import com.example.sopt30th.util.showToast
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
-class SignUpActivity : AppCompatActivity() {
-    private lateinit var binding: ActivitySignUpBinding
+class SignUpActivity : BaseActivity<ActivitySignUpBinding>() {
+    override val layoutRes: Int
+        get() = R.layout.activity_sign_up
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivitySignUpBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
         clickEvent()
     }
@@ -31,15 +31,14 @@ class SignUpActivity : AppCompatActivity() {
                 intent.putExtra("id", et_id.text.toString()) //id에 et_id 데이터 담음
                 intent.putExtra("pw", et_pw.text.toString()) //마찬가지로 pw에 et_pw 담음
                 setResult(Activity.RESULT_OK, intent) //result_ok인 경우 SignInActivitiy로 intent 객체 보냄
-                SignUpNetwork()
+
+                signUpNetwork()
                 finish()
             }
         }
     }
 
-    //    //함수.. oncreate 밑에 씁시다..
-
-    private fun SignUpNetwork() {
+    private fun signUpNetwork() {
         val requestSignUp = RequestSignUp(
             name = binding.etName.text.toString(),
             email = binding.etId.text.toString(),
