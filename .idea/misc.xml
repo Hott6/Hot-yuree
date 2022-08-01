@@ -66,6 +66,8 @@
         <entry key="app/src/main/res/layout/item_repo_list.xml" value="0.19740142822265627" />
         <entry key="app/src/main/res/layout/item_sample_list.xml" value="0.16197916666666667" />
         <entry key="app/src/main/res/menu/menu_sample.xml" value="0.1" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.243" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.243" />
       </map>
     </option>
   </component>
