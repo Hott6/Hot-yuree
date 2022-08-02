@@ -1,11 +1,13 @@
 package com.example.sopt30th.presentation.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import com.example.sopt30th.R
 import com.example.sopt30th.data.model.response.ResponseUserInfo
 import com.example.sopt30th.databinding.FragmentProfileFollowerBinding
 import com.example.sopt30th.presentation.adapter.ProfileFollowerAdapter
+import com.example.sopt30th.presentation.ui.activity.DetailActivity
 import com.example.sopt30th.presentation.ui.base.BaseFragment
 import com.example.sopt30th.util.ServiceCreator
 import retrofit2.Call
@@ -21,9 +23,10 @@ class ProfileFollowerFragment : BaseFragment<FragmentProfileFollowerBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        followerAdapter = ProfileFollowerAdapter()
+        followerAdapter = ProfileFollowerAdapter {
+            toDetailView(it.login, it.avatar_url)
+        }
         binding.rvFollower.adapter = followerAdapter
-
 
         initUserInfoNetwork()
     }
@@ -50,5 +53,14 @@ class ProfileFollowerFragment : BaseFragment<FragmentProfileFollowerBinding>() {
             override fun onFailure(call: Call<List<ResponseUserInfo>>, t: Throwable) {
             }
         })
+    }
+
+    private fun toDetailView(login: String, avatar_url: String) {
+        val intent = Intent(context, DetailActivity::class.java)
+        intent.apply {
+            putExtra("name", login)
+            putExtra("image", avatar_url)
+        }
+        startActivity(intent)
     }
 }

@@ -21,7 +21,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         initTransactionEvent()
-        initImage() //return 전에 작성해줘야 한다
+        initImage()
         clickEvent()
     }
 
@@ -40,7 +40,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     }
 
     fun initTransactionEvent() {
-
         val fragment1 = ProfileFollowerFragment()
         val fragment2 = ProfileRepoFragment()
 

@@ -40,13 +40,10 @@
             android:textColor="@color/black"
             android:textSize="25dp"
             android:textStyle="bold"
-            android:ellipsize="end"
-            android:maxLines="1"
             app:layout_constraintBottom_toBottomOf="@id/iv_profile"
             app:layout_constraintStart_toEndOf="@+id/iv_profile"
             app:layout_constraintTop_toTopOf="@+id/iv_profile"
             tools:text="최유리" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
