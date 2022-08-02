@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewmodel"
+            type="com.example.sopt30th.presentation.ui.viewmodel.SignUpViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,6 +49,7 @@
             android:fontFamily="@font/noto_sans_kr_regular"
             android:hint="이름을 입력해주세요."
             android:includeFontPadding="false"
+            android:text="@{viewmodel.userName}"
             app:layout_constraintTop_toBottomOf="@+id/tv_name"
             tools:layout_editor_absoluteX="10dp" />
 
@@ -70,6 +74,7 @@
             android:fontFamily="@font/noto_sans_kr_regular"
             android:hint="이메일을 입력해주세요."
             android:includeFontPadding="false"
+            android:text="@{viewmodel.userEmail}"
             app:layout_constraintTop_toBottomOf="@+id/tv_id"
             tools:layout_editor_absoluteX="10dp" />
 
@@ -95,6 +100,7 @@
             android:hint="비밀번호를 입력해주세요."
             android:includeFontPadding="false"
             android:inputType="textPassword"
+            android:text="@{viewmodel.userPw}"
             app:layout_constraintTop_toBottomOf="@+id/tv_pw"
             tools:layout_editor_absoluteX="10dp" />
 
