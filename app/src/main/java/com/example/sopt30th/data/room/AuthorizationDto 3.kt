@@ -6,6 +6,6 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class AuthorizationDto(
-    @PrimaryKey val userId: String,
-    @ColumnInfo(name = "autoLogin") val autoLogin: Boolean
+        @PrimaryKey val userId: String,
+        @ColumnInfo(name = "autoLogin") val autoLogin: Boolean
 )
