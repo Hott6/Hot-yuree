@@ -9,6 +9,7 @@ import com.example.sopt30th.databinding.FragmentProfileFollowerBinding
 import com.example.sopt30th.presentation.adapter.ProfileFollowerAdapter
 import com.example.sopt30th.presentation.ui.activity.DetailActivity
 import com.example.sopt30th.presentation.ui.base.BaseFragment
+import com.example.sopt30th.util.ItemDecoration
 import com.example.sopt30th.util.ServiceCreator
 import retrofit2.Call
 import retrofit2.Callback
@@ -28,7 +29,14 @@ class ProfileFollowerFragment : BaseFragment<FragmentProfileFollowerBinding>() {
         }
         binding.rvFollower.adapter = followerAdapter
 
+        followerItemDecoration()
         initUserInfoNetwork()
+    }
+
+    private fun followerItemDecoration() {
+        binding.rvFollower.addItemDecoration(
+            ItemDecoration(5)
+        )
     }
 
     private fun initUserInfoNetwork() {

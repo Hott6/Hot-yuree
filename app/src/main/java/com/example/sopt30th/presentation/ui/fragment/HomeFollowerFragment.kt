@@ -7,6 +7,7 @@ import com.example.sopt30th.data.model.response.ResponseUserInfo
 import com.example.sopt30th.databinding.FragmentHomeFollowerBinding
 import com.example.sopt30th.presentation.adapter.HomeFollowerAdapter
 import com.example.sopt30th.presentation.ui.base.BaseFragment
+import com.example.sopt30th.util.ItemDecoration
 import com.example.sopt30th.util.ServiceCreator
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,9 +23,16 @@ class HomeFollowerFragment : BaseFragment<FragmentHomeFollowerBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        followerItemDecoration()
         initUserInfoNetwork()
         followerAdapter = HomeFollowerAdapter()
         binding.rvFollower.adapter = followerAdapter
+    }
+
+    private fun followerItemDecoration() {
+        binding.rvFollower.addItemDecoration(
+            ItemDecoration(5)
+        )
     }
 
     private fun initUserInfoNetwork() {
