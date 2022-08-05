@@ -16,11 +16,22 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        buttonClickEvent()
 
         val name = intent.getStringExtra("name")
         binding.tvName.text = name
         val image = intent.getStringExtra("image")
         Glide.with(binding.ivProfileImage).load(image).circleCrop().into(binding.ivProfileImage)
+    }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
+
+    private fun buttonClickEvent(){
+        binding.btnBack.setOnClickListener{
+            finish()
+        }
     }
 }
