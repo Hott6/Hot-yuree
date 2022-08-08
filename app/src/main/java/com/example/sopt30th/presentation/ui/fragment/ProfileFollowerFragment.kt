@@ -35,7 +35,7 @@ class ProfileFollowerFragment : BaseFragment<FragmentProfileFollowerBinding>() {
 
     private fun followerItemDecoration() {
         binding.rvFollower.addItemDecoration(
-            ItemDecoration(5)
+            ItemDecoration(10)
         )
     }
 

@@ -16,8 +16,11 @@ class DetailActivity : BaseActivity<ActivityDetailBinding>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getProfileFollowerData()
         buttonClickEvent()
+    }
 
+    private fun getProfileFollowerData(){
         val name = intent.getStringExtra("name")
         binding.tvName.text = name
         val image = intent.getStringExtra("image")
