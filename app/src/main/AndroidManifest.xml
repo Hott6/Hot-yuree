@@ -14,14 +14,11 @@
         android:theme="@style/Theme.220402"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".presentation.ui.activity.DetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.ui.activity.OnboardingActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".presentation.ui.activity.SignInActivity"
             android:exported="true" />
@@ -30,7 +27,13 @@
             android:exported="false" />
         <activity
             android:name=".presentation.ui.activity.MainActivity"
-            android:exported="true" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".presentation.ui.activity.SettingActivity"
             android:exported="true" />

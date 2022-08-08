@@ -3,22 +3,24 @@ package com.example.sopt30th.presentation.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.sopt30th.databinding.ItemProfileFollowerListBinding
 import com.example.sopt30th.data.model.response.ResponseUserInfo
+import com.example.sopt30th.databinding.ItemProfileFollowerListBinding
 
-class ProfileFollowerAdapter : RecyclerView.Adapter<ProfileFollowerAdapter.FollowerViewHolder>() {
+class ProfileFollowerAdapter(private val itemClick: (ResponseUserInfo) -> (Unit)
+) : RecyclerView.Adapter<ProfileFollowerAdapter.FollowerViewHolder>() {
 
     val followerList = mutableListOf<ResponseUserInfo>()
 
-    class FollowerViewHolder(
-        private val binding: ItemProfileFollowerListBinding
+    inner class FollowerViewHolder(
+        private val binding: ItemProfileFollowerListBinding,
+        private val itemClick: (ResponseUserInfo) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: ResponseUserInfo) {
-            binding.follower = data //바인딩 이름, 설명 다 할 필요 없이 코드가 한 줄로 줄어들었음~
-            Glide.with(binding.ivProfile).load(data.avatar_url)
-                .circleCrop()
-                .into(binding.ivProfile)
+            binding.follower = data
+
+            binding.root.setOnClickListener{
+                itemClick(data)
+            }
         }
     }
 
@@ -29,7 +31,7 @@ class ProfileFollowerAdapter : RecyclerView.Adapter<ProfileFollowerAdapter.Follo
                 parent,
                 false
             )
-        return FollowerViewHolder(binding)
+        return FollowerViewHolder(binding, itemClick)
     }
 
 
