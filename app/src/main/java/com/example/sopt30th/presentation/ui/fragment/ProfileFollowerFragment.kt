@@ -28,7 +28,6 @@ class ProfileFollowerFragment : BaseFragment<FragmentProfileFollowerBinding>() {
             toDetailView(it.login, it.avatar_url)
         }
         binding.rvFollower.adapter = followerAdapter
-
         followerItemDecoration()
         initUserInfoNetwork()
     }

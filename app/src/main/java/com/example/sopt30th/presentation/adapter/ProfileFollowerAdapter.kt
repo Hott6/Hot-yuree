@@ -11,19 +11,6 @@ class ProfileFollowerAdapter(private val itemClick: (ResponseUserInfo) -> (Unit)
 
     val followerList = mutableListOf<ResponseUserInfo>()
 
-    inner class FollowerViewHolder(
-        private val binding: ItemProfileFollowerListBinding,
-        private val itemClick: (ResponseUserInfo) -> Unit
-    ) : RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: ResponseUserInfo) {
-            binding.follower = data
-
-            binding.root.setOnClickListener{
-                itemClick(data)
-            }
-        }
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowerViewHolder {
         val binding =
             ItemProfileFollowerListBinding.inflate(
@@ -40,5 +27,18 @@ class ProfileFollowerAdapter(private val itemClick: (ResponseUserInfo) -> (Unit)
     }
 
     override fun getItemCount(): Int = followerList.size
+
+    inner class FollowerViewHolder(
+        private val binding: ItemProfileFollowerListBinding,
+        private val itemClick: (ResponseUserInfo) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun onBind(data: ResponseUserInfo) {
+            binding.follower = data
+
+            binding.root.setOnClickListener{
+                itemClick(data)
+            }
+        }
+    }
 }
 
