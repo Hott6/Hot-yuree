@@ -1,7 +1,7 @@
 # **Seminar 1**
 
 ## 1. SignInActivity
-
+ 
 - [X] 로그인 페이지 만들기
 
 ```kotlin
